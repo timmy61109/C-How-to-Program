@@ -21,10 +21,6 @@ int main(int argc, char const *argv[]) {
 
   while (total != -1) {
     total = 0;
-    sales = 0;
-    county_sales_tax = 0;
-    state_sales_tax = 0;
-    total_sales_tax = 0;
 
     printf("Enter total amount collected (-1 to quit):");
     scanf("%f", &total);
