@@ -13,7 +13,7 @@
 
 int main(int argc, char const *argv[]) {
   float total;
-  char name;
+  char month = ' ';
   float sales;
   float county_sales_tax;
   float state_sales_tax;
@@ -31,7 +31,7 @@ int main(int argc, char const *argv[]) {
 
     if (total != -1) {
       printf("Enter name of month: ");
-      scanf("%s", &name);
+      scanf("%c", &month);
 
       county_sales_tax = total * 0.04;
       state_sales_tax = total * 0.05;
