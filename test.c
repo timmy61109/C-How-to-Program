@@ -1,20 +1,9 @@
 #include <stdio.h>
 
 int main(void) {
-  int value;
+  int x;
 
-  scanf("%d", &value);
-  value %= 2;
-
-  switch (value) {
-    case 0:
-      puts("Event integer");
-      break;
-
-    case !0:
-      puts("Odd integer");
-      break;
+  for (x = 15; x <= 55; x += 8){
+    printf("%d\n", x);
   }
-
-
 }
