@@ -1,23 +1,22 @@
 #include <stdio.h>
 
 int main(void) {
-  int n;
-  int sum;
-  int square;
-  int cube;
   int count;
+  int value;
+  int i;
+  int j;
 
-  sum = 0;
-  square = 0;
-  cube = 0;
+  count = 100;
 
-  printf("%s", "輸入一個非負號的整數：");
-  scanf("%d", &n);
-  printf("%s\t%s\t%s\n", "總和", "平方和", "立方和");
-  for (count = 1; count <= n; count++) {
-    sum += count;
-    square += count * count;
-    cube += count * count * count;
+  for (value = 1; value <= count; ++value){
+    j = 0;
+    for (i = 1; i <= value && j <= 2; i ++) {
+      if (value % i == 0) {
+        j++;
+      }
+    }
+    if (j == 2) {
+      printf("%u\n", value);
+    }
   }
-  printf("%d\t%d\t%d\n", sum, square, cube);
 }
