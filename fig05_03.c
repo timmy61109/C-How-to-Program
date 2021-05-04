@@ -5,8 +5,12 @@
 int square(int y);
 
 int main(int argc, char const *argv[]) {
-  for (size_t i = 0; i < 10; i++) {
-    printf("%u ", square(x));
+  for (size_t i = 1; i <= 10; i++) {
+    printf("%u ", square(i));
   }
   puts("");
+}
+
+int square(int y) {
+  return y * y;
 }
