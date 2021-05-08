@@ -5,17 +5,17 @@
 #include <stdlib.h>
 #include <time.h>
 
+enum Status
+{
+  CONTINUE, WON, LOST};
+
 int rollDice(void);
 
 int main(void) {
   srand(time(NULL));
 
   int myPoint;
-  enum Status{
-    WON,
-    LOST,
-    CONTINUE
-  }gameStatus;
+  enum Status gameStatus;
   int sum = rollDice();
 
   switch (sum) {
