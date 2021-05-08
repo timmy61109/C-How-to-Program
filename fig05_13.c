@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 int main(void) {
   unsigned int seed;
@@ -13,7 +14,19 @@ int main(void) {
 
   srand(seed);
 
-  for (i = 0; i <= 10; i++) {
+  for (i = 1; i <= 10; i++) {
+    // pick a random number form 1 to 6 and output it
+    printf("%10d", 1 + (rand() % 6));
+
+    if (i % 5 == 0) {
+      puts("");
+    }
+  }
+
+  // 使用自動化種子
+  srand(time(NULL));
+
+  for (i = 1; i <= 10; i++) {
     // pick a random number form 1 to 6 and output it
     printf("%10d", 1 + (rand() % 6));
 

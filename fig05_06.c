@@ -3,7 +3,7 @@
 // and stach frames using a function square.
 #include <stdio.h>
 
-int square(int);
+int square(int x);
 
 int main(int argc, char const *argv[]) {
   int a = 10;
