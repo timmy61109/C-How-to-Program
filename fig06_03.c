@@ -16,6 +16,6 @@ int main(int argc, char const *argv[]) {
 
   // output contents of array n in tabular format
   for (size_t i = 0; i < 5; i++) {
-    printf("%7u%13d\n", i, n[i]);
+    printf("%7lu%13d\n", i, n[i]);
   }
 }

@@ -7,7 +7,6 @@
 
 
 int main(void) {
-  unsigned int value;
   unsigned int counter;
   unsigned int heads;
   unsigned int tails;
