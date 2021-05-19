@@ -6,7 +6,7 @@
 int main(int argc, char const *argv[]) {
   unsigned int count;
   while (count <= 10) {
-    printf_s("%u\n", count);
+    printf("%u\n", count);
     ++count;
   }
 }

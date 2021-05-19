@@ -11,7 +11,7 @@ int main(void) {
   int result;
 
   while (student <= 10) {
-    printf_s("%s", "Enter result ( 1=pass, 2=fail): ");
+    printf("%s", "Enter result ( 1=pass, 2=fail): ");
     scanf("%d", &result);
 
     if (result == 1) {
@@ -26,8 +26,8 @@ int main(void) {
 
   }
 
-  printf_s("Passed %u\n", passes);
-  printf_s("Failed %u\n", failures);
+  printf("Passed %u\n", passes);
+  printf("Failed %u\n", failures);
 
   if ( passes > 8 ) {
     puts("Bonus to instuctor!");

@@ -6,6 +6,6 @@ int main(int argc, char const *argv[]) {
   unsigned int count;
 
   for (count = 1; count <= 10; count++) {
-    printf_s("%u\n", count);
+    printf("%u\n", count);
   }
 }

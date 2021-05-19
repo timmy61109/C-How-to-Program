@@ -25,7 +25,7 @@ int main(int argc, char const *argv[]) {
 
 
   // display results
-  if (index != -1) {
+  if (int(index) != -1) {
     printf("Found value at index %lu\n", index);
   } else {
     puts("Value not found");

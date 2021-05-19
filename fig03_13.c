@@ -8,13 +8,13 @@ int main(int argc, char const *argv[]) {
   int c;
 
   c = 5;
-  printf_s("%d\n", c);
-  printf_s("%d\n", c++);
-  printf_s("%d\n\n", c);
+  printf("%d\n", c);
+  printf("%d\n", c++);
+  printf("%d\n\n", c);
 
   c = 5;
-  printf_s("%d\n", c);
-  printf_s("%d\n", ++c);
-  printf_s("%d\n\n", c);
+  printf("%d\n", c);
+  printf("%d\n", ++c);
+  printf("%d\n\n", c);
 
 }
