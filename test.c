@@ -1,24 +1,20 @@
 #include <stdio.h>
-#include <math.h>
 
 int main(void) {
-  int n;
-  int sum;
-  int square;
-  int cube;
-  int count;
+  enum string {
+    X0,
+    X1,
+    X2 = 10,
+    X3,
+    X4,
+    X5 = 20,
+    X6,
+    X7,
+    X8 = 0,
+    X9,
+  };
 
-  sum = 0;
-  square = 0;
-  cube = 0;
-
-  printf("%s", "輸入一個非負號的整數：");
-  scanf("%d", &n);
-  printf("%s\t%s\t%s\n", "總和", "平方和", "立方和");
-  for (count = 1; count <= n; count++) {
-    sum += count;
-    square += pow(count, 2);
-    cube += pow(count, 3);
-  }
-  printf("%d\t%d\t%d\n", sum, square, cube);
+  enum string x = X3;
+  printf("%d\n", x);
+  printf("%d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n", X0, X1, X2, X3, X4, X5, X6, X7, X8, X9);
 }

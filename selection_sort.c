@@ -19,7 +19,6 @@ int main(int argc, char const *argv[]) {
 }
 
 void selection_sort(int array[], size_t size) {
-  int x;
   int tmp;
   for (size_t n = 0; n < size; n++) {
     for (size_t j = n + 1; j < size; j++) {
