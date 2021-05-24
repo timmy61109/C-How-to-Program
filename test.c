@@ -1,12 +1,36 @@
 #include <stdio.h>
-#define SIZE 900
+#include <stdlib.h>
+#include <time.h>
+#define SIZE 6
 
 
-int main(int argc, char const *argv[]) {
-  int reward[100];
+int main(void) {
+  int cuboid[36];
+  int throw1;
+  int throw2;
+  srand(time(NULL));
 
-  for (size_t i = 0; i < 100; ++i) {
-    reward[i] = 200 + ((SIZE + i) * 0.09);
+  for (size_t i = 0; i < 36; ++i) {
+      cuboid[i] = 0;
   }
-  printf("$%d~%d: %d~%d\n", SIZE, SIZE + 99, reward[0], reward[99]);
+
+  for (size_t i = 0; i < 36000; ++i) {
+    throw1 = rand() % SIZE;
+    throw2 = rand() % SIZE;
+    cuboid[throw1 * throw2 - 1] += 1;
+  }
+
+  printf("     ");
+  for (size_t i = 0; i < SIZE; ++i) {
+    printf("%5lu", i);
+  }
+  printf("\n");
+
+  for (size_t i = 0; i < SIZE; ++i) {
+    printf("%5lu", i);
+    for (size_t j = 0; j < SIZE; ++j) {
+      printf("%5d", cuboid[i * j]);
+    }
+    printf("\n");
+  }
 }
