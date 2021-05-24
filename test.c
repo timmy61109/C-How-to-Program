@@ -24,27 +24,29 @@ int main(void) {
   for (size_t i = 0; i < 36000; ++i) {
     throw1 = rand() % SIZE + 1;
     throw2 = rand() % SIZE + 1;
-    cuboid[throw1 + throw2 * 10] += 1;
+    cuboid[(throw1 + throw2 * 10) - 1] += 1;
     count[throw1 + throw2 - 1] += 1;
   }
 
-  printf("     ");
+  printf("      ");
   for (size_t i = 1; i <= SIZE; ++i) {
     printf("%6lu", i);
   }
-  printf("\n");
 
-  for (size_t i = 1; i <= SIZE; ++i) {
-    printf("%6lu", i);
-    for (size_t j = 1; j <= SIZE; ++j) {
-      printf("%6d", cuboid[i + j * 10]);
+  for (size_t i = 0; i < SIZE; ++i) {
+    printf("\n%6lu", i + 1);
+    for (size_t j = 0; j < SIZE; ++j) {
+      printf("%6d", cuboid[(i + 1) + ((j + 1) * 10) - 1]);
     }
-    printf("\n");
   }
-  puts("");
+  printf("\n\n");
 
   for (size_t i = 0; i < COUNT_SIZE; ++i) {
-    printf("%d ", count[i]);
+    printf("%6lu", i + 1);
+  }
+  puts("");
+  for (size_t i = 0; i < COUNT_SIZE; ++i) {
+    printf("%6d", count[i]);
   }
   puts("");
 }
