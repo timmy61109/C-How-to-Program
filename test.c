@@ -15,10 +15,9 @@ int main(void) {
 
   for (size_t i = 0; i < CUBOID_SIZE; ++i) {
       cuboid[i] = 0;
-  }
-
-  for (size_t i = 0; i < COUNT_SIZE; ++i) {
-      count[i] = 0;
+      if (i < COUNT_SIZE) {
+        count[i] = 0;
+      }
   }
 
   for (size_t i = 0; i < 36000; ++i) {
