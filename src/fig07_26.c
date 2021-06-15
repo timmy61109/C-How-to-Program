@@ -20,8 +20,8 @@ int main(void) {
   puts("\nData items in original order");
 
   // Loop through array a
-  for (size_t i = 0; i < SIZE; ++i) {
-    printf("%5d", a[i]);
+  for (size_t counter = 0; counter < SIZE; ++counter) {
+    printf("%5d", a[counter]);
   }
 
   if (order == 1) {
@@ -32,25 +32,22 @@ int main(void) {
     puts("\nData items in descending order");
   }
 
-
-  puts("\nData items in ascending order");
-
-  for (size_t i = 0; i < SIZE; ++i) {
-    printf("%4d", a[i]);
+  for (size_t counter = 0; counter < SIZE; ++counter) {
+    printf("%5d", a[counter]);
   }
 
-  puts("");
+  puts("\n");
 }
 
 // sart an array of integers using bubble sort algorithm
-void bubble(int * const array, const size_t size) {
+void bubble(int * const work[], size_t size, int (*compare)(int a, int b)) {
   void swap(int *element1Ptr, int *element2Ptr); // prototype
 
   // Loop to control passes
-  for (unsigned int pass = 0; pass <size -1; ++pass) {
-    for (size_t j = 0; j < size -1; ++j) {
-      if (array[j] > array[j + 1]) {
-        swap(&array[j], &array[j + 1]);
+  for (unsigned int pass = 1; pass < size; ++pass) {
+    for (size_t count = 0; count < size - 1; ++count) {
+      if ((*compare)(work[count], work[count + 1])) {
+        swap(&work[count], &work[count + 1]);
       }
     }
   }
@@ -60,4 +57,12 @@ void swap(int *element1Ptr, int *element2Ptr) {
   int hold = *element1Ptr;
   *element1Ptr = *element2Ptr;
   *element2Ptr = hold;
+}
+
+int ascending(int a, int b) {
+  return b < a;
+}
+
+int decending(int a, int b) {
+  return b > a;
 }

@@ -14,7 +14,7 @@ void deal(unsigned int wDeck[][FACES], const char *wFace[],
   const char *wSuit[]);
 
 int main(void) {
-  unsigned int deck[SUITS][FACES];
+  unsigned int deck[SUITS][FACES] = {0};
 
   srand(time(NULL));
   shuffle(deck);
@@ -42,11 +42,11 @@ void shuffle(unsigned int wDeck[][FACES]) {
 }
 
 void deal(unsigned int wDeck[][FACES], const char *wFace[], const char *wSuit[]) {
-  for (size_t card =1; card <= CARDS; ++card) {
+  for (size_t card = 1; card <= CARDS; ++card) {
     for (size_t row = 0; row < SUITS; ++row) {
-      for (size_t column; column < FACES; ++column) {
+      for (size_t column = 0; column < FACES; ++column) {
         if (wDeck[row][column] == card) {
-          printf("%5s of %-8s%c", wFace[column], wSuit[row], card % 2 == 0 ? '\n' : '\n');
+          printf("%5s of %-8s%c", wFace[column], wSuit[row], card % 2 == 0 ? '\n' : '\t');
         }
       }
     }
