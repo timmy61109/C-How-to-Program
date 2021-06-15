@@ -4,19 +4,19 @@
 #include <stdio.h>
 #include <ctype.h>
 
-void printCharacters(char *sPtr);
+void printCharacters(const char *sPtr);
 
 int main(void) {
-  char string[] = "cHaRaCters and $32.98";
+  char string[] = "print characters of a string";
 
-  printf("The string before conversion is: %s", string);
+  puts("The string is: ");
   printCharacters(string);
-  printf("\nThe string after conversion is: %s\n", string);
+  puts("");
 }
 
 
-void printCharacters(char *sPtr) {
+void printCharacters(const char *sPtr) {
   for (; *sPtr != '\0'; ++sPtr) {
-    printf("%c\n", *sPtr);
+    printf("%c", *sPtr);
   }
 }
