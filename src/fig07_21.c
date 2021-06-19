@@ -8,7 +8,7 @@ void copy2(char *s1, const char *s2);
 
 int main(void) {
   char string1[SIZE];
-  char *string2 = "Hello";
+  char *string2 = (char*) "Hello";
   copy1(string1, string2);
   printf("string1 = %s\n", string1);
 
