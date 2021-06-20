@@ -9,7 +9,7 @@ void displayBits(unsigned int value);
 
 int main(void) {
   srand(time(NULL));
-  unsigned int number = rand() % 4294967296;
+  unsigned int number = (unsigned int) ( rand() * 3.141592654) % rand() % 4294967296;
 
   puts("\n原本的數字");
   displayBits(number);
@@ -30,9 +30,10 @@ void reverse_bits(unsigned int value) {
 }
 
 void displayBits(unsigned int value) {
-  unsigned int displayMask = 1 << 31;
-  printf("%10u = ", value);
-  for (unsigned int c = 1; c <= 32; ++c) {
+  unsigned int bits = sizeof(value) * 8;
+  unsigned int displayMask = 1 << (bits - 1);
+  printf("%20u = ", value);
+  for (unsigned int c = 1; c <= bits; ++c) {
     putchar(value & displayMask ? '1': '0');
     value <<= 1;
     if (c % 8 == 0) {
