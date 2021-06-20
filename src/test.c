@@ -23,10 +23,10 @@ void reverse_bits(unsigned int value) {
   unsigned int high = 0;
   unsigned int low = 0;
   for (unsigned int i = 1; i <= bits / 2; ++i) {
-    high += (1 << (bits / 2 + (i - 1))) & (value << (i * 2 - 1));
-    low += (1 << (bits / 2 - i)) & (value >> (i * 2 - 1));
+    high |= (1 << (bits / 2 + (i - 1))) & (value << (i * 2 - 1));
+    low |= (1 << (bits / 2 - i)) & (value >> (i * 2 - 1));
   }
-  displayBits(high + low);
+  displayBits(high | low);
 }
 
 void displayBits(unsigned int value) {
