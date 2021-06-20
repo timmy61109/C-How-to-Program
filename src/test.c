@@ -1,56 +1,44 @@
+// Fig. 10.13: fig10_13.c
+// Using the bitwise shift operators
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 
-#define CARDS 52
-#define FACES 13
-
-struct bitCard {
-  unsigned int face : 4;
-  unsigned int suit : 2;
-};
-
-typedef struct bitCard Card;
-
-void fillDeck(Card * const wDeck);
-void shuffle(Card * const wDeck);
-void deal(const Card * const wDeck);
+void reverse_bits(unsigned int number);
+void displayBits(unsigned int value);
 
 int main(void) {
-  Card deck[CARDS];
   srand(time(NULL));
-  fillDeck(deck);
-  shuffle(deck);
-  deal(deck);
+  unsigned int number = rand() % 4294967296;
+
+  puts("\n原本的數字");
+  displayBits(number);
+  printf("\n%s %u %s %lu %s\n", "將數字", number, "在", (sizeof(number) * 8), "位元寬度進行Reverse Bits");
+  reverse_bits(number);
 }
 
-void fillDeck(Card * const wDeck) {
-  for (size_t i = 0; i < CARDS; ++i) {
-    wDeck[i].face = i % (CARDS / 4);
-    wDeck[i].suit = i / (CARDS / 4);
+void reverse_bits(unsigned int value) {
+  void displayBits(unsigned int value);
+  unsigned int bits = sizeof(value) * 8;
+  unsigned int high = 0;
+  unsigned int low = 0;
+  for (unsigned int i = 1; i <= bits / 2; ++i) {
+    high += (1 << (bits / 2 + (i - 1))) & (value << (i * 2 - 1));
+    low += (1 << (bits / 2 - i)) & (value >> (i * 2 - 1));
   }
+  displayBits(high + low);
 }
 
-void shuffle(Card * const wDeck) {
-  for (size_t i = 0; i < CARDS; ++i) {
-    size_t j = rand() % CARDS;
-    Card temp = wDeck[i];
-    wDeck[i] = wDeck[j];
-    wDeck[j] = temp;
+void displayBits(unsigned int value) {
+  unsigned int displayMask = 1 << 31;
+  printf("%10u = ", value);
+  for (unsigned int c = 1; c <= 32; ++c) {
+    putchar(value & displayMask ? '1': '0');
+    value <<= 1;
+    if (c % 8 == 0) {
+      putchar(' ');
+    }
   }
-}
-
-void deal(const Card * const wDeck) {
-  char face[13][10] = {
-    "Ace", "Deuce", "Three", "Four",
-    "Five", "Six", "Seven", "Eight",
-    "Nine", "Ten", "Jack", "Queen", "King"
-  };
-  char suit[4][10] = {"Hearts", "Diamonds", "Clubs", "Spades"};
-
-  printf("%-10s%-15s%-10s%-10s\n", "Suit", "Card", "Suit", "Card");
-  for (size_t k1 = 0, k2 = k1 + 26; k1 < CARDS / 2; ++k1, ++k2) {
-    printf("%-10s%-15s", suit[wDeck[k1].suit], face[wDeck[k1].face]);
-    printf("%-10s%-10s\n", suit[wDeck[k2].suit], face[wDeck[k2].face]);
-  }
+  putchar('\n');
 }
