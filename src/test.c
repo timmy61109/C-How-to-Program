@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <math.h>
 
 void reverse_bits(unsigned int number);
 void displayBits(unsigned int value);
