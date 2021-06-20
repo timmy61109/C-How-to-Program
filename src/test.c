@@ -17,13 +17,15 @@ int main(void) {
 
 unsigned int reverse_bits(unsigned int value) {
   unsigned int bits = sizeof(value) * 8;
-  unsigned int high = 0;
-  unsigned int low = 0;
-  for (unsigned int i = 1; i <= bits / 2; ++i) {
-    high |= (1 << (bits / 2 + (i - 1))) & (value << (i * 2 - 1));
-    low |= (1 << (bits / 2 - i)) & (value >> (i * 2 - 1));
+  unsigned mask = 1;
+  unsigned temp = 0;
+
+  for(size_t i = 0; i <= bits - 1; i++) {
+    temp <<= 1;
+    temp |= (value & mask);
+    value >>= 1;
   }
-  return high | low;
+  return temp;
 }
 
 void displayBits(unsigned int value) {
