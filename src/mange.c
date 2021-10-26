@@ -102,7 +102,7 @@ int main(int argc, char const *argv[]) {
     scanf(" %lld", &amount_of_money);
 
     getchar();
-    
+
     Data[i].license_plate = (char*) license_plate;
     Data[i].engine_number = (long long int*) engine_number;
     Data[i].name = (char*) name;
