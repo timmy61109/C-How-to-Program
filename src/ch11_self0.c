@@ -17,21 +17,44 @@ typedef struct {
   long long int *amount_of_money = (long long int*) 0;
 } vehicle_management;
 
-int main(int argc, char const *argv[]) {
-  char license_plate[LICENSE_PLATE] = {};
-  long long int engine_number = 0;
-  char name[NAME] = {};
-  char id[ID] = {};
-  long long int phone_number = 0;
-  char address[ADDR] = {};
-  char date[DATE] = {};
-  long long int amount_of_money = 0;
-  char search_name[NAME];
-  char *compare_name;
+void print_data(vehicle_management *data);
+void print_row_data(vehicle_management data);
+void vehicle_search(vehicle_management *data);
+void example_data(vehicle_management *data);
+void input_data(vehicle_management *data);
 
-  vehicle_management Data[SIZE];
+int main() {
+  vehicle_management data[SIZE];
+  vehicle_management example[SIZE];
 
-  vehicle_management Example[SIZE] = {
+  example_data(example);
+
+  input_data(data);
+  print_data(data);
+  vehicle_search(data);
+
+}
+
+void print_data(vehicle_management *data) {
+  for (size_t i = 0; i < SIZE; i++) {
+    print_row_data(*data++);
+  }
+}
+
+void print_row_data(vehicle_management data) {
+  printf("%s%s\n", "車牌：", data.license_plate);
+  printf("%s%lld\n", "引擎編號：", (long long int) data.engine_number);
+  printf("%s%s\n", "姓名：", data.name);
+  printf("%s%s\n", "身份證字號：", data.id);
+  printf("%s%lld\n", "電話：", (long long int) data.phone_number);
+  printf("%s%s\n", "地址：", data.address);
+  printf("%s%s\n", "時間：", data.date);
+  printf("%s%lld\n\n", "租金：", (long long int) data.amount_of_money);
+
+}
+
+void example_data(vehicle_management *data) {
+  vehicle_management example[SIZE] = {
     {
       (char*) "2432-6962-0262-2139",
       (long long int*) 21086155,
@@ -61,34 +84,22 @@ int main(int argc, char const *argv[]) {
       (long long int*) 114900
     }
   };
-
   printf("%s\n\n", "The is Example.");
+  print_data(example);
+}
+
+void input_data(vehicle_management *data) {
   for (size_t i = 0; i < SIZE; i++) {
-    printf("%s%s\n", "車牌：", Example[i].license_plate);
-    printf("%s%lld\n", "引擎編號：", (long long int) Example[i].engine_number);
-    printf("%s%s\n", "姓名：", Example[i].name);
-    printf("%s%s\n", "身份證字號：", Example[i].id);
-    printf("%s%lld\n", "電話：", (long long int) Example[i].phone_number);
-    printf("%s%s\n", "地址：", Example[i].address);
-    printf("%s%s\n", "時間：", Example[i].date);
-    printf("%s%lld\n\n", "租金：", (long long int) Example[i].amount_of_money);
-
-  }
-
-  for (size_t i = 0; i < SIZE; i++) {
-    license_plate[LICENSE_PLATE] = {};
-    engine_number = 0;
-    name[NAME] = {};
-    id[ID] = {};
-    phone_number = 0;
-    address[ADDR] = {};
-    date[DATE] = {};
-    amount_of_money = 0;
-
+    char license_plate[LICENSE_PLATE];
+    long long int engine_number;
+    char name[NAME];
+    char id[ID];
+    long long int phone_number;
+    char address[ADDR];
+    char date[DATE];
+    long long int amount_of_money;
     printf("%s", "輸入車牌：");
     fgets(license_plate, LICENSE_PLATE, stdin);
-
-    getchar();
 
     printf("%s", "輸入引擎編號：");
     scanf(" %lld", &engine_number);
@@ -100,7 +111,6 @@ int main(int argc, char const *argv[]) {
     printf("%s", "輸入身份證字號：");
     fgets(id, ID, stdin);
 
-    getchar();
     printf("%s", "輸入電話：");
     scanf(" %lld", &phone_number);
 
@@ -117,60 +127,35 @@ int main(int argc, char const *argv[]) {
     getchar();
     puts("");
 
-    Data[i].license_plate = (char*) &license_plate;
-    Data[i].engine_number = (long long int*) engine_number;
-    Data[i].name = (char*) &name;
-    Data[i].id = (char*) &id;
-    Data[i].phone_number = (long long int*) phone_number;
-    Data[i].address = (char*) &address;
-    Data[i].date = (char*) &date;
-    Data[i].amount_of_money = (long long int*) amount_of_money;
-
-    printf("%s%s\n", "車牌：", Data[i].license_plate);
-    printf("%s%lld\n", "引擎編號：", (long long int) Data[i].engine_number);
-    printf("%s%s\n", "姓名：", Data[i].name);
-    printf("%s%s\n", "身份證字號：", Data[i].id);
-    printf("%s%lld\n", "電話：", (long long int) Data[i].phone_number);
-    printf("%s%s\n", "地址：", Data[i].address);
-    printf("%s%s\n", "時間：", Data[i].date);
-    printf("%s%lld\n\n", "租金：", (long long int) Data[i].amount_of_money);
-
+    (*data).license_plate = (char*) &license_plate;
+    (*data).engine_number = (long long int*) engine_number;
+    (*data).name = (char*) &name;
+    (*data).id = (char*) &id;
+    (*data).phone_number = (long long int*) phone_number;
+    (*data).address = (char*) &address;
+    (*data).date = (char*) &date;
+    (*data).amount_of_money = (long long int*) amount_of_money;
+    data++;
 
   }
+  print_data(data);
+}
 
-  for (size_t i = 0; i < SIZE; i++) {
-    printf("%s%s\n", "車牌：", Data[i].license_plate);
-    printf("%s%lld\n", "引擎編號：", (long long int) Data[i].engine_number);
-    printf("%s%s\n", "姓名：", Data[i].name);
-    printf("%s%s\n", "身份證字號：", Data[i].id);
-    printf("%s%lld\n", "電話：", (long long int) Data[i].phone_number);
-    printf("%s%s\n", "地址：", Data[i].address);
-    printf("%s%s\n", "時間：", Data[i].date);
-    printf("%s%lld\n\n", "租金：", (long long int) Data[i].amount_of_money);
-
-  }
-
+void vehicle_search(vehicle_management data[SIZE]) {
+  char search_name[NAME];
+  char *compare_name;
   printf("%s", "輸入搜尋姓名：");
   fgets(search_name, NAME, stdin);
-  puts(search_name);
 
   for (size_t i = 0; i < SIZE; i++) {
-    compare_name = *&(Data[i].name);
+    compare_name = *&(data[i].name);
     printf("%lu", i);
     printf("%s%s\n", "姓名：", compare_name);
-    printf("%s%s\n", "姓名：", Data[i].name);
+    printf("%s%s\n", "姓名：", data[i].name);
     if (compare_name == search_name) {
-      printf("%s%s\n", "車牌：", Data[i].license_plate);
-      printf("%s%lld\n", "引擎編號：", (long long int) Data[i].engine_number);
-      printf("%s%s\n", "姓名：", Data[i].name);
-      printf("%s%s\n", "身份證字號：", Data[i].id);
-      printf("%s%lld\n", "電話：", (long long int) Data[i].phone_number);
-      printf("%s%s\n", "地址：", Data[i].address);
-      printf("%s%s\n", "時間：", Data[i].date);
-      printf("%s%lld\n\n", "租金：", (long long int) Data[i].amount_of_money);
+      print_data(data++);
 
       break;
     }
   }
-
 }
