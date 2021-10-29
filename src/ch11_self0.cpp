@@ -1,10 +1,10 @@
 #include <stdio.h>
 #define SIZE 3
+#define LICENSE_PLATE 19
+#define NAME 20
+#define ID 10
 #define ADDR 200
 #define DATE 20
-#define LICENSE_PLATE 19
-#define ID 10
-#define NAME 20
 
 typedef struct {
   char *license_plate = (char*) "";
