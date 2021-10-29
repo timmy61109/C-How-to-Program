@@ -19,4 +19,5 @@ int main(int argc, char const *argv[]) {
   printf("\n\nShowing that * and & are complements of"
         "each other\n&*aPrt = %p"
         "\n*&aPtr = %p\n", &*aPrt, *&aPrt);
+
 }

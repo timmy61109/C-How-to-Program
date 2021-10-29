@@ -18,7 +18,17 @@ typedef struct {
 } vehicle_management;
 
 int main(int argc, char const *argv[]) {
+  char license_plate[LICENSE_PLATE] = {};
+  long long int engine_number = 0;
+  char name[NAME] = {};
+  char id[ID] = {};
+  long long int phone_number = 0;
+  char address[ADDR] = {};
+  char date[DATE] = {};
+  long long int amount_of_money = 0;
   char search_name[NAME];
+  char *compare_name;
+
   vehicle_management Data[SIZE];
 
   vehicle_management Example[SIZE] = {
@@ -66,28 +76,31 @@ int main(int argc, char const *argv[]) {
   }
 
   for (size_t i = 0; i < SIZE; i++) {
-    char license_plate[LICENSE_PLATE];
-    long long int engine_number;
-    char name[NAME];
-    char id[ID];
-    long long int phone_number;
-    char address[ADDR];
-    char date[DATE];
-    long long int amount_of_money;
+    license_plate[LICENSE_PLATE] = {};
+    engine_number = 0;
+    name[NAME] = {};
+    id[ID] = {};
+    phone_number = 0;
+    address[ADDR] = {};
+    date[DATE] = {};
+    amount_of_money = 0;
 
     printf("%s", "輸入車牌：");
     fgets(license_plate, LICENSE_PLATE, stdin);
 
+    getchar();
+
     printf("%s", "輸入引擎編號：");
     scanf(" %lld", &engine_number);
-
     getchar();
+
     printf("%s", "輸入姓名：");
     fgets(name, NAME, stdin);
 
     printf("%s", "輸入身份證字號：");
     fgets(id, ID, stdin);
 
+    getchar();
     printf("%s", "輸入電話：");
     scanf(" %lld", &phone_number);
 
@@ -102,16 +115,26 @@ int main(int argc, char const *argv[]) {
     scanf(" %lld", &amount_of_money);
 
     getchar();
-
-    Data[i].license_plate = (char*) license_plate;
-    Data[i].engine_number = (long long int*) engine_number;
-    Data[i].name = (char*) name;
-    Data[i].id = (char*) id;
-    Data[i].phone_number = (long long int*) phone_number;
-    Data[i].address = (char*) address;
-    Data[i].date = (char*) date;
-    Data[i].amount_of_money = (long long int*) amount_of_money;
     puts("");
+
+    Data[i].license_plate = (char*) &license_plate;
+    Data[i].engine_number = (long long int*) engine_number;
+    Data[i].name = (char*) &name;
+    Data[i].id = (char*) &id;
+    Data[i].phone_number = (long long int*) phone_number;
+    Data[i].address = (char*) &address;
+    Data[i].date = (char*) &date;
+    Data[i].amount_of_money = (long long int*) amount_of_money;
+
+    printf("%s%s\n", "車牌：", Data[i].license_plate);
+    printf("%s%lld\n", "引擎編號：", (long long int) Data[i].engine_number);
+    printf("%s%s\n", "姓名：", Data[i].name);
+    printf("%s%s\n", "身份證字號：", Data[i].id);
+    printf("%s%lld\n", "電話：", (long long int) Data[i].phone_number);
+    printf("%s%s\n", "地址：", Data[i].address);
+    printf("%s%s\n", "時間：", Data[i].date);
+    printf("%s%lld\n\n", "租金：", (long long int) Data[i].amount_of_money);
+
 
   }
 
@@ -129,10 +152,14 @@ int main(int argc, char const *argv[]) {
 
   printf("%s", "輸入搜尋姓名：");
   fgets(search_name, NAME, stdin);
-  puts("");
+  puts(search_name);
 
   for (size_t i = 0; i < SIZE; i++) {
-    if (Data[i].name == search_name) {
+    compare_name = *&(Data[i].name);
+    printf("%lu", i);
+    printf("%s%s\n", "姓名：", compare_name);
+    printf("%s%s\n", "姓名：", Data[i].name);
+    if (compare_name == search_name) {
       printf("%s%s\n", "車牌：", Data[i].license_plate);
       printf("%s%lld\n", "引擎編號：", (long long int) Data[i].engine_number);
       printf("%s%s\n", "姓名：", Data[i].name);
