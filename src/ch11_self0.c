@@ -54,13 +54,13 @@ void print_data(vehicle_management *data) {
 
 void print_row_data(vehicle_management data) {
   printf("%s%s\n", "車牌：", data.license_plate);
-  printf("%s%lld\n", "引擎編號：", (long long int) data.engine_number);
+  printf("%s%s\n", "引擎編號：", data.engine_number);
   printf("%s%s\n", "姓名：", data.name);
   printf("%s%s\n", "身份證字號：", data.id);
   printf("%s%s\n", "電話：", data.phone_number);
   printf("%s%s\n", "地址：", data.address);
   printf("%s%s\n", "時間：", data.date);
-  printf("%s%lld\n\n", "租金：", (long long int) data.amount_of_money);
+  printf("%s%s\n\n", "租金：", data.amount_of_money);
 
 }
 
@@ -68,31 +68,31 @@ void example_data(vehicle_management *data) {
   vehicle_management create[SIZE] = {
     {
       (char*) "2432-6962-0262-2139",
-      (char*) 21086155,
+      (char*) "21086155",
       (char*) "甯庭佳",
       (char*) "J257823365",
       (char*) "+886 976041644",
       (char*) "457 新北市雙溪區大灣七街二段335巷144弄740號13樓",
       (char*) "February 18, 1988",
-      (char*) 73200
+      (char*) "73200"
     }, {
       (char*) "5295-7162-0442-0867",
-      (char*) 31312262,
+      (char*) "31312262",
       (char*) "司婉安",
       (char*) "Q214131854",
       (char*) "+886 923402560",
       (char*) "374-80 基隆市中正區通明街六段553巷966弄277號44樓",
       (char*) "July 4, 1936",
-      (char*) 65800
+      (char*) "65800"
     }, {
       (char*) "2432-6962-0262-2139",
-      (char*) 69848125,
+      (char*) "69848125",
       (char*) "姜雅涵",
       (char*) "E129441704",
       (char*) "+886 959404352",
       (char*) "670 高雄市左營區吉利四街350號",
       (char*) "February 2, 1999",
-      (char*) 114900
+      (char*) "114900"
     }
   };
   for (size_t i = 0; i < SIZE; i++) {
@@ -116,44 +116,52 @@ void input_data(vehicle_management *data) {
 
     printf("%p\n", &create[i]);
     printf("%s", "輸入車牌：");
-    fgets(license_plate, LICENSE_PLATE, stdin);
+    scanf(" %[^\n]", license_plate);
 
     printf("%s", "輸入引擎編號：");
-    fgets(engine_number, ENGINE, stdin);
+    scanf(" %[^\n]", engine_number);
+    // fgets(engine_number, ENGINE, stdin);
 
     printf("%s", "輸入姓名：");
-    fgets(name, NAME, stdin);
+    scanf(" %[^\n]", name);
+    // fgets(name, NAME, stdin);
 
     printf("%s", "輸入身份證字號：");
-    fgets(id, ID, stdin);
+    scanf(" %[^\n]", id);
 
     printf("%s", "輸入電話：");
-    fgets(phone_number, PHONE_NUMBER, stdin);
+    scanf(" %[^\n]", phone_number);
+    // fgets(phone_number, PHONE_NUMBER, stdin);
 
     printf("%s", "輸入地址：");
-    fgets(address, ADDR, stdin);
+    scanf(" %[^\n]", address);
+    // fgets(address, ADDR, stdin);
 
     printf("%s", "輸入時間：");
-    fgets(date, DATE, stdin);
+    scanf(" %[^\n]", date);
+    // fgets(date, DATE, stdin);
 
     printf("%s", "輸入租金：");
-    fgets(amount_of_money, MONEY, stdin);
+    scanf(" %[^\n]", amount_of_money);
+    // fgets(amount_of_money, MONEY, stdin);
 
     puts("");
 
     vehicle_management tmp;
-    tmp.license_plate = (char*) license_plate;
-    tmp.engine_number = (char*) engine_number;
-    tmp.name = (char*) name;
-    tmp.id = (char*) id;
-    tmp.phone_number = (char*) phone_number;
-    tmp.address = (char*) address;
-    tmp.date = (char*) date;
-    tmp.amount_of_money = (char*) amount_of_money;
-    *(create + i) = tmp;
-
+    tmp.license_plate = license_plate;
+    tmp.engine_number = engine_number;
+    tmp.name = name;
+    tmp.id = id;
+    tmp.phone_number = phone_number;
+    tmp.address = address;
+    tmp.date = date;
+    tmp.amount_of_money = amount_of_money;
+    print_row_data(create[i]);
+    create[i] = tmp;
+    print_row_data(tmp);
+    print_row_data(create[i]);
   }
-  print_data(create);
+  print_data(&create[0]);
   for (size_t i = 0; i < SIZE; i++) {
     data[i] = create[i];
     printf("the data %p to %p\n", &create[i], &data[i]);
@@ -172,8 +180,7 @@ void vehicle_search(vehicle_management *data) {
     printf("%s%s\n", "姓名：", compare_name);
     printf("%s%s\n", "姓名：", data[i].name);
     if (compare_name == search_name) {
-      print_data(data++);
-
+      print_row_data(*(data + i));
       break;
     }
   }
