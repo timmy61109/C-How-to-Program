@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #define SIZE 3
 #define LICENSE_PLATE 22
 #define ENGINE 12
@@ -18,17 +19,17 @@ typedef struct {
   char *address = (char*) "";
   char *date = (char*) "";
   char *amount_of_money = (char*) "";
-} vehicle_management;
+} vehicle_management_t;
 
-void print_data(vehicle_management *data);
-void print_row_data(vehicle_management data);
-void vehicle_search(vehicle_management *data);
-void example_data(vehicle_management *data);
-void input_data(vehicle_management *data);
+void print_data(vehicle_management_t *data);
+void print_row_data(vehicle_management_t data);
+void vehicle_search(vehicle_management_t *data);
+void example_data(vehicle_management_t *data);
+void input_data(vehicle_management_t *data);
 
 int main() {
-  vehicle_management in_data[SIZE];
-  vehicle_management example[SIZE];
+  vehicle_management_t in_data[SIZE];
+  vehicle_management_t example[SIZE];
 
   printf("Example陣列第一元素指標:\n%p\n\n", example);
   example_data(example);
@@ -45,14 +46,14 @@ int main() {
 
 }
 
-void print_data(vehicle_management *data) {
+void print_data(vehicle_management_t *data_p) {
   for (size_t i = 0; i < SIZE; i++) {
-    printf("%p\n", &*(data + i));
-    print_row_data(*(data + i));
+    printf("%p\n", &*(data_p + i));
+    print_row_data(*(data_p + i));
   }
 }
 
-void print_row_data(vehicle_management data) {
+void print_row_data(vehicle_management_t data) {
   printf("%s%s\n", "車牌：", data.license_plate);
   printf("%s%s\n", "引擎編號：", data.engine_number);
   printf("%s%s\n", "姓名：", data.name);
@@ -64,8 +65,8 @@ void print_row_data(vehicle_management data) {
 
 }
 
-void example_data(vehicle_management *data) {
-  vehicle_management create[SIZE] = {
+void example_data(vehicle_management_t *data) {
+  vehicle_management_t create[SIZE] = {
     {
       (char*) "2432-6962-0262-2139",
       (char*) "21086155",
@@ -99,55 +100,46 @@ void example_data(vehicle_management *data) {
     data[i] = create[i];
     printf("%p\n", &data[i]);
   }
-
 }
 
-void input_data(vehicle_management *data) {
-  vehicle_management create[SIZE];
+void input_data(vehicle_management_t *data) {
+  char license_plate[LICENSE_PLATE];
+  char engine_number[ENGINE];
+  char name[NAME];
+  char id[ID];
+  char phone_number[PHONE_NUMBER];
+  char address[ADDR];
+  char date[DATE];
+  char amount_of_money[MONEY];
+  vehicle_management_t tmp;
   for (size_t i = 0; i < SIZE; i++) {
-    char license_plate[LICENSE_PLATE];
-    char engine_number[ENGINE];
-    char name[NAME];
-    char id[ID];
-    char phone_number[PHONE_NUMBER];
-    char address[ADDR];
-    char date[DATE];
-    char amount_of_money[MONEY];
-
-    printf("%p\n", &create[i]);
+    printf("%p\n", &*(data + i));
     printf("%s", "輸入車牌：");
     scanf(" %[^\n]", license_plate);
 
     printf("%s", "輸入引擎編號：");
     scanf(" %[^\n]", engine_number);
-    // fgets(engine_number, ENGINE, stdin);
 
     printf("%s", "輸入姓名：");
     scanf(" %[^\n]", name);
-    // fgets(name, NAME, stdin);
 
     printf("%s", "輸入身份證字號：");
     scanf(" %[^\n]", id);
 
     printf("%s", "輸入電話：");
     scanf(" %[^\n]", phone_number);
-    // fgets(phone_number, PHONE_NUMBER, stdin);
 
     printf("%s", "輸入地址：");
     scanf(" %[^\n]", address);
-    // fgets(address, ADDR, stdin);
 
     printf("%s", "輸入時間：");
     scanf(" %[^\n]", date);
-    // fgets(date, DATE, stdin);
 
     printf("%s", "輸入租金：");
     scanf(" %[^\n]", amount_of_money);
-    // fgets(amount_of_money, MONEY, stdin);
 
     puts("");
 
-    vehicle_management tmp;
     tmp.license_plate = license_plate;
     tmp.engine_number = engine_number;
     tmp.name = name;
@@ -156,19 +148,12 @@ void input_data(vehicle_management *data) {
     tmp.address = address;
     tmp.date = date;
     tmp.amount_of_money = amount_of_money;
-    print_row_data(create[i]);
-    create[i] = tmp;
-    print_row_data(tmp);
-    print_row_data(create[i]);
-  }
-  print_data(&create[0]);
-  for (size_t i = 0; i < SIZE; i++) {
-    data[i] = create[i];
-    printf("the data %p to %p\n", &create[i], &data[i]);
+    *(data + i) = tmp;
+    printf("%p\n", &*(data + i));
   }
 }
 
-void vehicle_search(vehicle_management *data) {
+void vehicle_search(vehicle_management_t *data) {
   char search_name[NAME];
   char *compare_name;
   printf("%s", "輸入搜尋姓名：");
