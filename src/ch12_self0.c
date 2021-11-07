@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define SIZE 3
 #define LICENSE_PLATE 22
-#define ENGINE 12
+#define ENGINE 10
 #define NAME 22
 #define ID 12
-#define PHONE_NUMBER 16
-#define ADDR 202
+#define PHONE_NUMBER 17
+#define ADDR 2000 * 32
 #define DATE 22
 #define MONEY 22
 
@@ -31,17 +32,14 @@ int main() {
   vehicle_management_t in_data[SIZE];
   vehicle_management_t example[SIZE];
 
-  printf("Example陣列第一元素指標:\n%p\n\n", example);
   example_data(example);
   printf("%s\n\n", "The is Example.");
   print_data(example);
 
-  printf("Input資料陣列第一元素指標:\n%p\n\n", in_data);
   input_data(in_data);
-  printf("%p\n", in_data);
-
-  printf("%s\n\n", "The is key in data.");
+  printf("\n%s\n\n", "The is key in data.");
   print_data(in_data);
+
   vehicle_search(in_data);
 
 }
@@ -98,57 +96,53 @@ void example_data(vehicle_management_t *data) {
   };
   for (size_t i = 0; i < SIZE; i++) {
     data[i] = create[i];
-    printf("%p\n", &data[i]);
   }
 }
 
 void input_data(vehicle_management_t *data) {
-  char license_plate[LICENSE_PLATE];
-  char engine_number[ENGINE];
-  char name[NAME];
-  char id[ID];
-  char phone_number[PHONE_NUMBER];
-  char address[ADDR];
-  char date[DATE];
-  char amount_of_money[MONEY];
-  vehicle_management_t tmp;
+  char license_plate[SIZE][LICENSE_PLATE];
+  char engine_number[SIZE][ENGINE];
+  char name[SIZE][NAME];
+  char id[SIZE][ID];
+  char phone_number[SIZE][PHONE_NUMBER];
+  char address[SIZE][ADDR];
+  char date[SIZE][DATE];
+  char amount_of_money[SIZE][MONEY];
+
   for (size_t i = 0; i < SIZE; i++) {
-    printf("%p\n", &*(data + i));
     printf("%s", "輸入車牌：");
-    scanf(" %[^\n]", license_plate);
+    scanf(" %[^\n]", license_plate[i]);
 
     printf("%s", "輸入引擎編號：");
-    scanf(" %[^\n]", engine_number);
+    scanf(" %[^\n]", engine_number[i]);
 
     printf("%s", "輸入姓名：");
-    scanf(" %[^\n]", name);
+    scanf(" %[^\n]", name[i]);
 
     printf("%s", "輸入身份證字號：");
-    scanf(" %[^\n]", id);
+    scanf(" %[^\n]", id[i]);
 
     printf("%s", "輸入電話：");
-    scanf(" %[^\n]", phone_number);
+    scanf(" %[^\n]", phone_number[i]);
 
     printf("%s", "輸入地址：");
-    scanf(" %[^\n]", address);
+    scanf(" %[^\n]", address[i]);
 
     printf("%s", "輸入時間：");
-    scanf(" %[^\n]", date);
+    scanf(" %[^\n]", date[i]);
 
     printf("%s", "輸入租金：");
-    scanf(" %[^\n]", amount_of_money);
+    scanf(" %[^\n]", amount_of_money[i]);
 
-    puts("");
+    (data + i)->license_plate = license_plate[i];
+    (data + i)->engine_number = engine_number[i];
+    (data + i)->name = name[i];
+    (data + i)->id = id[i];
+    (data + i)->phone_number = phone_number[i];
+    (data + i)->address = address[i];
+    (data + i)->date = date[i];
+    (data + i)->amount_of_money = amount_of_money[i];
 
-    tmp.license_plate = license_plate;
-    tmp.engine_number = engine_number;
-    tmp.name = name;
-    tmp.id = id;
-    tmp.phone_number = phone_number;
-    tmp.address = address;
-    tmp.date = date;
-    tmp.amount_of_money = amount_of_money;
-    *(data + i) = tmp;
   }
 }
 
@@ -156,16 +150,17 @@ void vehicle_search(vehicle_management_t *data) {
   char search_name[NAME];
   char *compare_name;
   printf("%s", "輸入搜尋姓名：");
-  fgets(search_name, NAME, stdin);
+  scanf(" %[^\n]", search_name);
 
+  puts("");
+  printf("\n%s%s\n\n", "姓名：", search_name);
   for (size_t i = 0; i < SIZE; i++) {
-    compare_name = *&(data[i].name);
-    printf("%lu", i);
-    printf("%s%s\n", "姓名：", compare_name);
-    printf("%s%s\n", "姓名：", data[i].name);
-    if (compare_name == search_name) {
+    compare_name = (data + i)->name;
+    if (strcmp(compare_name ,search_name) == 0) {
       print_row_data(*(data + i));
       break;
+    } else if ((i + 1) == SIZE) {
+      printf("%s\n", "Search from database, not in.");
     }
   }
 }
