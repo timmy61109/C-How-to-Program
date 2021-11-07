@@ -7,7 +7,7 @@
 #define NAME 22
 #define ID 12
 #define PHONE_NUMBER 17
-#define ADDR 200
+#define ADDR 2000 * 32
 #define DATE 22
 #define MONEY 22
 
@@ -144,7 +144,6 @@ void input_data(vehicle_management_t *data) {
     (data + i)->amount_of_money = amount_of_money[i];
 
   }
-  print_data(data);
 }
 
 void vehicle_search(vehicle_management_t *data) {
