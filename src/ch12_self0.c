@@ -167,6 +167,15 @@ void search(vehicle_management_t *data) {
   }
 }
 
+void keyin(vehicle_management_t *data, unsigned int *account, char *name, double *balance) {
+  puts("Enter the account, name, and balance.");
+  puts("Enter EOF to end input.(Linux is Ctrl + D, Windows is Ctrl + Z)");
+  while (!feof(stdin)) {
+    printf("%s", "> ");
+    scanf("%d%29s%lf[^\n]", account, name, balance);
+  }
+}
+
 void write_data(vehicle_management_t *data_p, size_t count) {
   puts("File is write...");
   for (size_t i = 0; i < count; i++) {
