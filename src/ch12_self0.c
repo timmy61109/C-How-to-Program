@@ -27,7 +27,7 @@ void print_row_data(vehicle_management_t data);
 void search(vehicle_management_t *data);
 void example_data(vehicle_management_t *data);
 void input_data(vehicle_management_t *data);
-void write_data(vehicle_management_t *data_p);
+void write_data(vehicle_management_t *data_p, size_t count);
 void write_row_data(vehicle_management_t data);
 
 int main() {
@@ -37,11 +37,10 @@ int main() {
   example_data(example);
   printf("%s\n\n", "The is Example.");
   print_data(example);
-
   input_data(in_data);
   printf("\n%s\n\n", "The is key in data.");
   print_data(in_data);
-  write_data(in_data);
+  write_data(in_data, SIZE);
 
   search(in_data);
 
@@ -168,9 +167,9 @@ void search(vehicle_management_t *data) {
   }
 }
 
-void write_data(vehicle_management_t *data_p) {
+void write_data(vehicle_management_t *data_p, size_t count) {
   puts("File is write...");
-  for (size_t i = 0; i < SIZE; i++) {
+  for (size_t i = 0; i < count; i++) {
     printf("%p row: %ld\n", &*(data_p + i), i);
     write_row_data(*(data_p + i));
   }
