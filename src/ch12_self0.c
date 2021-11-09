@@ -24,9 +24,11 @@ typedef struct {
 
 void print_data(vehicle_management_t *data);
 void print_row_data(vehicle_management_t data);
-void vehicle_search(vehicle_management_t *data);
+void search(vehicle_management_t *data);
 void example_data(vehicle_management_t *data);
 void input_data(vehicle_management_t *data);
+void write_data(vehicle_management_t *data_p);
+void write_row_data(vehicle_management_t data);
 
 int main() {
   vehicle_management_t in_data[SIZE];
@@ -39,8 +41,9 @@ int main() {
   input_data(in_data);
   printf("\n%s\n\n", "The is key in data.");
   print_data(in_data);
+  write_data(in_data);
 
-  vehicle_search(in_data);
+  search(in_data);
 
 }
 
@@ -72,7 +75,7 @@ void example_data(vehicle_management_t *data) {
       (char*) "J257823365",
       (char*) "+886 976041644",
       (char*) "457 新北市雙溪區大灣七街二段335巷144弄740號13樓",
-      (char*) "February 18, 1988",
+      (char*) "Februaunsigned int *account, char *name, double *balancery 18, 1988",
       (char*) "73200"
     }, {
       (char*) "5295-7162-0442-0867",
@@ -146,7 +149,7 @@ void input_data(vehicle_management_t *data) {
   }
 }
 
-void vehicle_search(vehicle_management_t *data) {
+void search(vehicle_management_t *data) {
   char search_name[NAME];
   char *compare_name;
   printf("%s", "輸入搜尋姓名：");
@@ -162,5 +165,33 @@ void vehicle_search(vehicle_management_t *data) {
     } else if ((i + 1) == SIZE) {
       printf("%s\n", "Search from database, not in.");
     }
+  }
+}
+
+void write_data(vehicle_management_t *data_p) {
+  puts("File is write...");
+  for (size_t i = 0; i < SIZE; i++) {
+    printf("%p row: %ld\n", &*(data_p + i), i);
+    write_row_data(*(data_p + i));
+  }
+}
+
+void write_row_data(vehicle_management_t data) {
+  FILE *stderr_p;
+
+  if ((stderr_p = fopen("vehicle_management_data.csv", "a")) == NULL) {
+    puts("File could not be opened");
+  } else {
+    fprintf(stderr_p, "%s, %s, %s, %s, %s, %s, %s, %s\n",
+      data.license_plate,
+      data.engine_number,
+      data.name,
+      data.id,
+      data.phone_number,
+      data.address,
+      data.date,
+      data.amount_of_money
+    );
+    fclose(stderr_p);
   }
 }
