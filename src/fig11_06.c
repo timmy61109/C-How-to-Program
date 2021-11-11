@@ -1,4 +1,4 @@
-// Fig. 11.2: fig11_02.c
+// Fig. 11.6: fig11_06.c
 // Creating a sequential file
 #include <stdio.h>
 
