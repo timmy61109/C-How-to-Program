@@ -203,3 +203,7 @@ void write_row_data(vehicle_management_t data) {
     fclose(stderr_p);
   }
 }
+
+void read_row_data() {
+
+}
