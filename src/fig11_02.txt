@@ -1,0 +1,9 @@
+100 Timmy 24.98
+200 King 233.30
+234 BonJovi -2334.30
+300 White 0.00
+301 French 0.00
+302 Moter 0.00
+303 Son 0.00
+400 Stone -42.16
+500 Rich 224.62
