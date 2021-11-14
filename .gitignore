@@ -1,6 +1,9 @@
 電一乙110910204吳晨知第*作業.pdf
 *.txt
-vehicle_management_data.csv
+*.csv
+*.dat
+!fig*_*.txt
+!ch*_self*.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
