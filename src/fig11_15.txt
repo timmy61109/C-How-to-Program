@@ -1,0 +1,35 @@
+3
+1
+Wu Timmy 24.98
+3
+2
+Ic King 233.30
+3
+23
+Bon Jovi -2334.30
+3
+30
+DDD White 0.00
+3
+31
+DDD French 0.00
+3
+32
+As Moter 0.00
+3
+33
+Stat Son 0.00
+3
+40
+Tom Stone -42.16
+3
+53
+Ra Rich 224.62
+3
+41
+Tom Stvet -42.16
+3
+52
+Dap Rich 224.62
+1
+5
