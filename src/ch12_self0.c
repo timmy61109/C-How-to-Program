@@ -233,6 +233,9 @@ void export_csv(char *name, vehicle_management_t *data_p, unsigned int count) {
   write_data(name, data_p, count);
 }
 
+void database() {
+}
+
 void creat_database(char *name, unsigned int count) {
   FILE *cf_p;
   if ((cf_p = fopen(name, "wb")) == NULL) {
@@ -327,6 +330,6 @@ void update(FILE * file_p, unsigned int count) {
   }
 }
 
-void merge() {
-
+void merge(char *database_name_p, char *file_p) {
+  ;
 }
