@@ -40,11 +40,62 @@ void update(FILE * file_p, unsigned int count);
 
 int main() {
   vehicle_management_t in_data[SIZE];
-  char database_p[23] = "vehicle_management.dat";
 
-  creat_database(database_p, 10000);
   search(in_data);
 
+  FILE *cf_p;
+  if ((cf_p = fopen("accounts.dat", "rb+")) == NULL) {
+    puts("File could not be opened.");
+
+  } else {
+    unsigned int choice;
+
+    while ((choice = enterChoice()) != 5) {
+      switch (choice) {
+        case 1:
+          textFile(cf_p);
+          break;
+
+        case 2:
+          updateRecord(cf_p);
+          break;
+
+        case 3:
+          newRecord(cf_p);
+          break;
+
+        case 4:
+          deleteRecord(cf_p);
+          break;
+
+        case 5:
+          puts("Incorrect choice");
+          break;
+
+        default:
+          puts("\nPlease enter function number.");
+          break;
+      }
+    }
+
+    fclose(cf_p);
+  }
+
+}
+
+unsigned int init() {
+  printf("%s",
+    "\nEnter request\n"
+    " 1 - database\n"
+    " 2 - vi\n"
+    " 3 - merge\n"
+    " 4 - print example data\n"
+    " 4 - end program\n"
+    "\n > "
+  );
+  unsigned int menuChoice;
+  scanf("%u", &menuChoice);
+  return menuChoice;
 }
 
 void print_data(vehicle_management_t *data_p, unsigned int count) {
@@ -233,11 +284,50 @@ void export_csv(char *name, vehicle_management_t *data_p, unsigned int count) {
   write_data(name, data_p, count);
 }
 
-void database() {
+unsigned int enterChoice() {
+  printf("%s",
+    "\nEnter request\n"
+    " 1 - store a formatted text file of accounts called\n"
+    "     \"accounts.txt\" for rinting\n"
+    " 2 - update an account\n"
+    " 3 - add a new account\n"
+    " 4 - delete an account\n"
+    " 5 - end program\n\n > "
+  );
+  unsigned int menuChoice;
+  scanf("%u", &menuChoice);
+  return menuChoice;
 }
 
-void creat_database(char *name, unsigned int count) {
+void database(char *name) {
   FILE *cf_p;
+  if ((cf_p = fopen(name, "rb+")) == NULL) {
+    puts("File could not be opened.");
+
+  } else {
+    unsigned int choice;
+
+    while ((choice = enterChoice()) != 5) {
+
+      switch (choice) {
+        case 1:
+          char *database_name_p;
+
+          scanf("%s", database_name_p);
+          creat_database(cf_p, database_name_p, 10000);
+          break;
+
+        default:
+          puts("\nPlease enter function number.");
+          break;
+      }
+    }
+
+    fclose(cf_p);
+  }
+}
+
+void creat_database(FILE *cf_p, char *name, unsigned int count) {
   if ((cf_p = fopen(name, "wb")) == NULL) {
     puts("File could not be opened.");
 
@@ -331,5 +421,5 @@ void update(FILE * file_p, unsigned int count) {
 }
 
 void merge(char *database_name_p, char *file_p) {
-  ;
+  read_data();
 }
