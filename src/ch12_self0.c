@@ -67,8 +67,7 @@ void write_row_data(char *file_name_p, vehicle_management_t data);
 void read_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *count_p);
 
 int main() {
-  FILE file;
-  FILE *file_p = &file;
+  FILE *file_p;
   vehicle_management_t data_p[DATABASE];
   vehicle_management_t example_data_p[SIZE];
   unsigned int *count_p = 0;
