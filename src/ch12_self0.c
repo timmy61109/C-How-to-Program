@@ -32,9 +32,11 @@ unsigned int init_menu();
 
 // database
 unsigned int database_menu();
-void database(FILE *file_p, char *database_name_p, unsigned int *count_p);
+void database(FILE *file_p, char *database_name_p, unsigned int *count_p,
+  vehicle_management_t *data_p);
 void creat_database(FILE *file_p, char *database_name_p, unsigned int *count_p);
-void use_database(FILE *file_p, char *database_name_p, unsigned int *count_p);
+void use_database(FILE *file_p, char *database_name_p, unsigned int *count_p,
+  vehicle_management_t *data_p);
 
 // management
 unsigned int management_meun();
@@ -68,9 +70,10 @@ void read_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *co
 
 int main() {
   FILE *file_p = fopen("", "rb");
-  unsigned int count_p;
+  unsigned int count_p = 10000;
   char file_name_p[50];
   char database_name_p[50] = "test.dat";
+  creat_database(file_p, database_name_p, &count_p);
   file_p = fopen(database_name_p, "rb+");
   use_database(file_p, database_name_p, &count_p);
   vehicle_management_t *data_p[count_p];
@@ -149,7 +152,8 @@ void creat_database(FILE *file_p, char *database_name_p, unsigned int *count_p) 
   fclose(file_p);
 }
 
-void use_database(FILE *file_p, char *database_name_p, unsigned int *count_p) {
+void use_database(FILE *file_p, char *database_name_p, unsigned int *count_p,
+    vehicle_management_t *data_p) {
   *count_p = 0;
   vehicle_management_t data;
   if ((file_p = fopen(database_name_p, "rb+")) == NULL) {
@@ -162,7 +166,19 @@ void use_database(FILE *file_p, char *database_name_p, unsigned int *count_p) {
       *count_p += 1;
       fread(&data, sizeof(vehicle_management_t), 1, file_p);
     }
+    *count_p -= 2;
     printf("%u\n", *count_p);
+    rewind(file_p);
+    vehicle_management_t data[*count_p];
+
+    while (!feof(file_p)) {
+      *count_p += 1;
+      fread((data + *count_p), sizeof(vehicle_management_t), 1, file_p);
+    }
+
+    for (size_t i = 0; i < SIZE; i++) {
+      data_p[i] = data[i];
+    }
   }
 }
 
@@ -253,7 +269,7 @@ void insert(FILE *file_p, unsigned int *count_p, vehicle_management_t *data_p) {
     printf("%s", "\n (insert)\n");
     keyin_row(&data);
 
-    vehicle_management_t temp = {0, "", 0, "", "", "", "", "", 0};
+    vehicle_management_t temp;
     fseek(file_p, (data.number - 1) * sizeof(vehicle_management_t), SEEK_SET);
     fread(&temp, sizeof(vehicle_management_t), 1, file_p);
     print_row_data(temp);
