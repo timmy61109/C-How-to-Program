@@ -23,21 +23,21 @@ class Student {
 
 Student::Student(char *s, char *c) {
   unsigned len;
-  len=strlen(s);  // 複製學校名
-  school= new char[len+1];
-  strcpy(school,s);
-  len=strlen(c);  // 複製班級名
-  class_num=new char[len+1];
-  strcpy(class_num,c);
+  len = strlen(s);  // 複製學校名
+  school = new char[len + 1];
+  strcpy(school, s);
+  len = strlen(c);  // 複製班級名
+  class_num = new char[len + 1];
+  strcpy(class_num, c);
 }
 
 Student::Student(const Student& str) {
   // Copy constructor
   unsigned len;
-  len = strlen(str.school);        //複製學校名
+  len = strlen(str.school);  //複製學校名
   school = new char[len+1];
   strcpy(school,str.school);
-  len = strlen(str.class_num);   //複製班級名
+  len = strlen(str.class_num);  //複製班級名
   class_num = new char[len+1];
   strcpy(class_num,str.class_num);
  }
@@ -58,7 +58,9 @@ void Student::show_data() {
 }
 
 int main() {
-  Student stu1("國立金門技術學院", "電三甲");
+  char school[256] = "國立金門技術學院";
+  char cls[256] = "電三甲";
+  Student stu1(school, cls);
   Student stu2 = stu1;
   Student stu3 = stu1;
   stu1.ip_data();
