@@ -1,2 +1,2 @@
-g++ project_1.cpp project_1_1.cpp
+g++ project_*.cpp
 ./a.out
