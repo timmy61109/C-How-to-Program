@@ -32,25 +32,21 @@ unsigned int init_menu();
 
 // database
 unsigned int database_menu();
-void database(FILE *file_p, char *database_name_p, unsigned int *count_p,
-  vehicle_management_t *data_p);
-void creat_database(FILE *file_p, char *database_name_p, unsigned int *count_p);
-void use_database(FILE *file_p, char *database_name_p, unsigned int *count_p,
-  vehicle_management_t *data_p);
+void database(vehicle_management_t *data_p);
+void creat_database();
+void use_database(vehicle_management_t *data_p);
 
 // management
 unsigned int management_meun();
-void management(FILE *file_p, unsigned int *count_p,
-  vehicle_management_t *data_p, char *file_name_p);
-void export_csv(unsigned int *count_p,
-  vehicle_management_t *data_p, char *file_name_p);
-void insert(FILE *file_p, unsigned int *count_p, vehicle_management_t *data_p);
-void selete(FILE *file_p, unsigned int *count_p, vehicle_management_t *data_p);
-void drop(FILE *file_p, unsigned int *count_p, vehicle_management_t *data_p);
-void update(FILE *file_p, unsigned int *count_p, vehicle_management_t *data_p);
+void management(vehicle_management_t *data_p);
+void export_csv(vehicle_management_t *data_p);
+void insert(vehicle_management_t *data_p);
+void selete(vehicle_management_t *data_p);
+void drop(vehicle_management_t *data_p);
+void update(vehicle_management_t *data_p);
 
 // print example data
-void example(vehicle_management_t *data_p, unsigned int *count_p);
+void example(vehicle_management_t *data_p);
 
 // file merge to database
 void merge_menu();
@@ -69,15 +65,12 @@ void write_row_data(char *file_name_p, vehicle_management_t data);
 void read_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *count_p);
 
 int main() {
-  FILE *file_p = fopen("", "rb");
-  unsigned int count_p = 10000;
-  char file_name_p[50];
-  char database_name_p[50] = "test.dat";
-  creat_database(file_p, database_name_p, &count_p);
-  file_p = fopen(database_name_p, "rb+");
-  use_database(file_p, database_name_p, &count_p);
-  vehicle_management_t *data_p[count_p];
-  management(file_p, &count_p, *data_p, file_name_p);
+  unsigned int count = DATABASE;
+  vehicle_management_t data[DATABASE];
+  creat_database();
+  use_database(data);
+  print_data(data, &count);
+  // management(data);
 }
 
 unsigned int init_menu() {
@@ -94,21 +87,17 @@ unsigned int database_menu() {
   return database_menu_choice;
 }
 
-void database(FILE *file_p, char *database_name_p, unsigned int *count_p) {
+void database(vehicle_management_t *data_p) {
   unsigned int choice = 119;
 
   while (choice != 3) {
     switch (choice) {
       case 1:
-        printf("%s", "Please keyin database name, data quantity: ");
-        scanf("%s%u", database_name_p, count_p);
-        creat_database(file_p, database_name_p, count_p);
+        creat_database();
         break;
 
       case 2: {
-        printf("%s", "Please keyin database name: ");
-        scanf("%s", database_name_p);
-        use_database(file_p, database_name_p, count_p);
+        use_database(data_p);
         break;
       }
 
@@ -137,14 +126,20 @@ void database(FILE *file_p, char *database_name_p, unsigned int *count_p) {
   }
 }
 
-void creat_database(FILE *file_p, char *database_name_p, unsigned int *count_p) {
+void creat_database() {
+  FILE *file_p;
+  char database_name_p[50] = "test.dat";
+  vehicle_management_t database = {0, "", 0, "", "", "", "", "", 0};
+
+  printf("%s", "Please keyin database name, data quantity: ");
+  // scanf("%s", database_name_p);
+
   if ((file_p = fopen(database_name_p, "wb")) == NULL) {
     puts("File could not be opened.");
 
   } else {
-    vehicle_management_t database = {0, "", 0, "", "", "", "", "", 0};
 
-    for (size_t i = 0; i <= *count_p; i++) {
+    for (size_t i = 0; i <= DATABASE; i++) {
       fwrite(&database, sizeof(vehicle_management_t), 1, file_p);
     }
     printf("%s%s%s", "database ", database_name_p, " is success.\n");
@@ -152,10 +147,12 @@ void creat_database(FILE *file_p, char *database_name_p, unsigned int *count_p) 
   fclose(file_p);
 }
 
-void use_database(FILE *file_p, char *database_name_p, unsigned int *count_p,
-    vehicle_management_t *data_p) {
-  *count_p = 0;
-  vehicle_management_t data;
+void use_database(vehicle_management_t *data_p) {
+  FILE *file_p;
+  char database_name_p[50] = "test.dat";
+  printf("%s", "Please keyin database name: ");
+  // scanf("%s", database_name_p);
+  unsigned int count = 0;
   if ((file_p = fopen(database_name_p, "rb+")) == NULL) {
     puts("File could not be opened.");
 
@@ -163,23 +160,12 @@ void use_database(FILE *file_p, char *database_name_p, unsigned int *count_p,
     printf("%s\n", "compute file size...");
 
     while (!feof(file_p)) {
-      *count_p += 1;
-      fread(&data, sizeof(vehicle_management_t), 1, file_p);
+      fread(&data_p[count], sizeof(vehicle_management_t), 1, file_p);
+      count++;
     }
-    *count_p -= 2;
-    printf("%u\n", *count_p);
-    rewind(file_p);
-    vehicle_management_t data[*count_p];
-
-    while (!feof(file_p)) {
-      *count_p += 1;
-      fread((data + *count_p), sizeof(vehicle_management_t), 1, file_p);
-    }
-
-    for (size_t i = 0; i < SIZE; i++) {
-      data_p[i] = data[i];
-    }
+    printf("%u\n", count);
   }
+  fclose(file_p);
 }
 
 unsigned int management_meun() {
@@ -189,39 +175,34 @@ unsigned int management_meun() {
   return management_menu_choice;
 }
 
-void management(FILE *file_p, unsigned int *count_p,
-    vehicle_management_t *data_p, char *file_name_p) {
-  for (size_t i = 0; i < *count_p; i++) {
-    fseek(file_p, i * sizeof(vehicle_management_t), SEEK_SET);
-    fread((data_p + i), sizeof(vehicle_management_t), 1, file_p);
-  }
-  print_data(data_p, count_p);
+void management(vehicle_management_t *data_p) {
+  unsigned int count = DATABASE;
+  print_data(data_p, &count);
   unsigned int choice = 119;
   while (choice != 6) {
     switch (choice) {
       case 1: {
-        printf("%s", "Please keyin file name: ");
-        scanf("%s", file_name_p);
-        export_csv(count_p, data_p, file_name_p);
+
+        export_csv(data_p);
         break;
       }
 
       case 2: {
-        selete(file_p, count_p, data_p);
+        selete(data_p);
       }
 
       case 3: {
-        update(file_p, count_p, data_p);
+        update(data_p);
         break;
       }
 
       case 4: {
-        insert(file_p, count_p, data_p);
+        insert(data_p);
         break;
       }
 
       case 5: {
-        drop(file_p, count_p, data_p);
+        drop(data_p);
         break;
       }
 
@@ -252,103 +233,88 @@ void management(FILE *file_p, unsigned int *count_p,
   }
 }
 
-void export_csv(unsigned int *count_p,
-  vehicle_management_t *data_p, char *file_name_p) {
-  write_data(file_name_p, data_p, count_p);
+void export_csv(vehicle_management_t *data_p) {
+  unsigned int count = DATABASE;
+  char file_name[50];
+  printf("%s", "Please keyin file name: ");
+  scanf("%s", file_name);
+  write_data(file_name, data_p, &count);
+
 }
 
-void insert(FILE *file_p, unsigned int *count_p, vehicle_management_t *data_p) {
-  printf("%u\n", *count_p);
+void insert(vehicle_management_t *data_p) {
+  unsigned int account = 0;
+  unsigned int count = DATABASE;
   vehicle_management_t data;
-  if (*count_p == 0) {
+  if (sizeof(data_p) == 0) {
     printf("%s\n", "Is not dat.");
-  } else if (file_p == NULL) {
-    puts("File could not be opened.");
   } else {
-    printf("%s%u%s\n", "Enter account to update (1 - ", *count_p, "): ");
-    printf("%s", "\n (insert)\n");
-    keyin_row(&data);
+    printf("%s%u%s\n", "Enter account to update (1 - ", count, "): ");
+    printf("%s", "\n (insert) >>> \n");
+    scanf("%d", &account);
 
     vehicle_management_t temp;
-    fseek(file_p, (data.number - 1) * sizeof(vehicle_management_t), SEEK_SET);
-    fread(&temp, sizeof(vehicle_management_t), 1, file_p);
-    print_row_data(temp);
 
     if (temp.number != 0) {
       printf("Account #%u already contains information.\n", data.number);
       print_row_data(temp);
 
     } else {
-
-      fwrite(&data, sizeof(vehicle_management_t), 1, file_p);
+      keyin_row(&data);
+      data_p[account - 1] = data;
     }
   }
 }
 
-void selete(FILE *file_p, unsigned int *count_p, vehicle_management_t *data_p) {
-  printf("%s%u%s", "Enter name search (1 - ", *count_p, ")\n");
-
-  for (size_t i = 0; i < *count_p; i++) {
-    fseek(file_p, i * sizeof(vehicle_management_t), SEEK_SET);
-    fread(&data_p[i], sizeof(vehicle_management_t), 1, file_p);
-    print_row_data(data_p[i]);
-  }
+void selete(vehicle_management_t *data_p) {
+  unsigned int count = DATABASE;
+  printf("%s%u%s", "Enter name search (1 - ", count, ")\n");
 
   printf("%s", "\n (selete) >>> ");
-  search(data_p, count_p);
+  search(data_p, &count);
 }
 
-void drop(FILE *file_p, unsigned int *count_p, vehicle_management_t *data_p) {
-  printf("%s%u%s\n", "Enter account to delete (1 - ", *count_p, ")");
-  printf("%s", "\n (delete) >>> ");
+void drop(vehicle_management_t *data_p) {
   unsigned int account = 0;
+
+  printf("%s%u%s\n", "Enter account to delete (1 - ", DATABASE, ")");
+  printf("%s", "\n (delete) >>> ");
   scanf("%d", &account);
 
-  fseek(file_p, (account - 1) * sizeof(vehicle_management_t), SEEK_SET);
-
-  vehicle_management_t data;
-
-  fread(&data, sizeof(vehicle_management_t), 1, file_p);
-
-  if (data.number == 0) {
+  if (data_p[account - 1].number == 0) {
     printf("Account %d does no exist.\n", account);
 
   } else {
-    fseek(file_p, (account - 1) * sizeof(vehicle_management_t), SEEK_SET);
     vehicle_management_t data = {0, "", 0, "", "", "", "", "", 0};
-    fwrite(&data, sizeof(vehicle_management_t), 1, file_p);
-
+    data_p[account - 1] = data;
     puts("Delete success");
   }
 }
 
-void update(FILE *file_p, unsigned int *count_p, vehicle_management_t *data_p) {
+void update(vehicle_management_t *data_p) {
+  unsigned int count = DATABASE;
   unsigned int account = 0;
-  scanf("%d", &account);
-  fseek(file_p, (account - 1) * sizeof(vehicle_management_t), SEEK_SET);
-
   vehicle_management_t data;
-  fread(&data, sizeof(vehicle_management_t), 1, file_p);
 
-  if (data.number == 0) {
+  printf("%s%u%s", "Enter number to update (1 - ", count, ")\n");
+  printf("%s", "\n (delete) >>> ");
+  scanf("%d", &account);
+  print_row_data(data_p[account - 1]);
+
+  if (data_p[account - 1].number == 0) {
     printf("Account #%d has no information.\n", account);
 
   } else {
-    print_row_data(data);
 
-    printf("%s%u%s", "Enter number to update (1 - ", *count_p, ")\n");
-    printf("%s", "\n (delete) >>> ");
     keyin_row(&data);
-
     print_row_data(data);
 
-    fseek(file_p, (account - 1) * sizeof(vehicle_management_t), SEEK_SET);
-    fwrite(&data, sizeof(vehicle_management_t), 1, file_p);
+    data_p[account - 1] = data;
+
   }
 }
 
-void example(vehicle_management_t *data_p, unsigned int *count_p) {
-  *count_p = SIZE;
+void example(vehicle_management_t *data_p) {
   vehicle_management_t create[SIZE] = {
     {
       1,
@@ -382,7 +348,7 @@ void example(vehicle_management_t *data_p, unsigned int *count_p) {
       114900
     }
   };
-  for (size_t i = 0; i < *count_p; i++) {
+  for (size_t i = 0; i < SIZE; i++) {
     data_p[i] = create[i];
   }
 }
