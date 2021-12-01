@@ -139,7 +139,7 @@ void creat_database() {
 
   } else {
 
-    for (size_t i = 0; i <= DATABASE; i++) {
+    for (size_t i = 0; i < DATABASE; i++) {
       fwrite(&database, sizeof(vehicle_management_t), 1, file_p);
     }
     printf("%s%s%s", "database ", database_name_p, " is success.\n");
