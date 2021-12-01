@@ -65,12 +65,13 @@ void write_row_data(char *file_name_p, vehicle_management_t data);
 void read_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *count_p);
 
 int main() {
-  unsigned int count = DATABASE;
   vehicle_management_t data[DATABASE];
+  unsigned int count = DATABASE;
   creat_database();
   use_database(data);
   print_data(data, &count);
-  // management(data);
+  insert(data);
+  print_data(data, &count);
 }
 
 unsigned int init_menu() {
