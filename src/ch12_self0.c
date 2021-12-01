@@ -248,23 +248,19 @@ void export_csv(vehicle_management_t *data_p) {
 void insert(vehicle_management_t *data_p) {
   unsigned int account = 0;
   unsigned int count = DATABASE;
-  vehicle_management_t data;
   if (sizeof(data_p) == 0) {
     printf("%s\n", "Is not dat.");
   } else {
     printf("%s%u%s\n", "Enter account to update (1 - ", count, "): ");
-    printf("%s", "\n (insert) >>> \n");
+    printf("%s", "\n (insert) >>> ");
     scanf("%d", &account);
 
-    vehicle_management_t temp;
-
-    if (temp.number != 0) {
-      printf("Account #%u already contains information.\n", data.number);
-      print_row_data(temp);
+    if (data_p[account - 1].number != 0) {
+      printf("Account #%u already contains information.\n", data_p[account - 1].number);
+      print_row_data(data_p[account - 1]);
 
     } else {
-      keyin_row(&data);
-      data_p[account - 1] = data;
+      keyin_row(&data_p[account - 1]);
     }
   }
 }
