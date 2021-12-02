@@ -277,7 +277,7 @@ void selete(vehicle_management_t *data_p) {
   printf("%s%u%s", "Enter name search (1 - ", count, ")\n");
 
   printf("%s", "\n (selete) >>> ");
-  search(data_p, &count);
+  search(data_p);
 }
 
 void drop(vehicle_management_t *data_p) {
