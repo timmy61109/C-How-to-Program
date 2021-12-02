@@ -501,12 +501,12 @@ void write_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *c
 }
 
 void write_row_data(char *file_name_p, vehicle_management_t data) {
-  FILE *stderr_p;
+  FILE *file_p;
 
-  if ((stderr_p = fopen(file_name_p, "a")) == NULL) {
+  if ((file_p = fopen(file_name_p, "a")) == NULL) {
     puts("File could not be opened");
   } else {
-    fprintf(stderr_p, "%u, %s, %u, %s, %s, %s, %s, %s, %u\n",
+    fprintf(file_p, "%u, \"%s\", %u, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", %u\n",
       data.number,
       data.license_plate,
       data.engine_number,
@@ -517,7 +517,7 @@ void write_row_data(char *file_name_p, vehicle_management_t data) {
       data.date,
       data.amount_of_money
     );
-    fclose(stderr_p);
+    fclose(file_p);
   }
 }
 
