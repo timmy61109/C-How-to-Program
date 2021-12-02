@@ -276,6 +276,7 @@ void selete(vehicle_management_t *data_p) {
 
 void drop(vehicle_management_t *data_p) {
   unsigned int account = 0;
+  vehicle_management_t temp = {0, "", 0, "", "", "", "", "", 0};
 
   printf("%s%u%s\n", "Enter account to delete (1 - ", DATABASE, ")");
   printf("%s", "\n (delete) >>> ");
@@ -285,8 +286,7 @@ void drop(vehicle_management_t *data_p) {
     printf("Account %d does no exist.\n", account);
 
   } else {
-    vehicle_management_t data = {0, "", 0, "", "", "", "", "", 0};
-    data_p[account - 1] = data;
+    data_p[account - 1] = temp;
     puts("Delete success");
   }
 }
