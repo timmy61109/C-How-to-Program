@@ -66,17 +66,57 @@ void read_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *co
 
 int main() {
   vehicle_management_t data[DATABASE];
-  unsigned int count = DATABASE;
-  creat_database();
-  use_database(data);
-  insert(data);
-  update(data);
-  drop(data);
-  insert(data);
-  insert(data);
-  insert(data);
-  selete(data);
-  print_data(data, &count);
+  unsigned int choice = 119;
+  while (choice != 5) {
+    switch (choice) {
+      case 1: {
+        puts("database");
+        database(data);
+        break;
+      }
+
+      case 2: {
+        puts("management");
+        management(data);
+        break;
+      }
+
+      case 3: {
+        puts("merge");
+        break;
+      }
+
+      case 4: {
+        puts("example");
+        example(data);
+        break;
+      }
+
+      case 5: {
+        puts("Bye Bye~");
+        break;
+      }
+
+      case 119: {
+        printf("%s",
+          "\nEnter request\n"
+          " 1    database\n"
+          " 2    management\n"
+          " 3    merge data\n"
+          " 4    example data\n"
+          " 5    end program\n"
+          " 119  help\n"
+        );
+        break;
+      }
+
+      default: {
+        puts("Incorrect choice, Please enter function number.(1~5, help is 9)");
+        break;
+      }
+    }
+  choice = init_menu();
+  }
 }
 
 unsigned int init_menu() {
