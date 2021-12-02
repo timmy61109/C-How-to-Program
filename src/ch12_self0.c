@@ -238,6 +238,7 @@ void management(vehicle_management_t *data_p) {
 
       case 2: {
         selete(data_p);
+        break;
       }
 
       case 3: {
