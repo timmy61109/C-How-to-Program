@@ -57,7 +57,7 @@ void database_merge_file(char *file_name_p, char *database_name_p, unsigned int 
 // Share function
 void keyin(vehicle_management_t *data_p, unsigned int *count_p);
 void keyin_row(vehicle_management_t *data_row_p);
-void search(vehicle_management_t *data_p, unsigned int *count_p);
+void search(vehicle_management_t *data_p);
 void print_data(vehicle_management_t *data_p, unsigned int *count_p);
 void print_row_data(vehicle_management_t data);
 void write_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *count_p);
@@ -410,25 +410,26 @@ void keyin_row(vehicle_management_t *data_row_p) {
 
 }
 
-void search(vehicle_management_t *data_p, unsigned int *count_p) {
-  char search_name[NAME];
+void search(vehicle_management_t *data_p) {
   vehicle_management_t null = {0, "", 0, "", "", "", "", "", 0};
-  vehicle_management_t temp[*count_p];
+  char search_name[NAME];
+  unsigned int count = 0;
   scanf(" %[^\n]", search_name);
 
-  puts("");
-  printf("\n%s%s\n\n", "姓名：", search_name);
-  for (size_t i = 0; i < *count_p; i++) {
-    if (strcmp((data_p + i)->name ,search_name) == 0) {
-      *(temp + i) = *(data_p + i);
-      print_row_data(*(data_p + i));
-      print_row_data(*(temp + i));
-      break;
-    } else if ((i + 1) == *count_p) {
+  printf("\n\n%s%s\n\n", "姓名：", search_name);
+  for (size_t i = 0; i < DATABASE; i++) {
+    if (strcmp((data_p + i)->name, search_name) == 0) {
+      if (data_p[count].number == 0) {
+        data_p[count] = data_p[i];
+        data_p[count].number = count + 1;
+        data_p[i] = null;
+        count++;
+      }
+    } else if (i < DATABASE) {
+      data_p[i] = null;
+
+    } else if ((i + 1) == DATABASE) {
       printf("%s\n", "Search from database, not in.");
-    } else {
-      *(temp + i) = null;
-      print_row_data(*(temp + i));
     }
   }
 }
