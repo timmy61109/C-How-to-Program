@@ -69,18 +69,14 @@ int main() {
   unsigned int count = DATABASE;
   creat_database();
   use_database(data);
-  print_data(data, &count);
   insert(data);
-  print_data(data, &count);
   update(data);
-  print_data(data, &count);
   drop(data);
-  print_data(data, &count);
   insert(data);
   insert(data);
   insert(data);
-  print_data(data, &count);
   selete(data);
+  print_data(data, &count);
 }
 
 unsigned int init_menu() {
