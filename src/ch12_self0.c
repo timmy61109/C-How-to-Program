@@ -129,11 +129,11 @@ void database(vehicle_management_t *data_p) {
 
 void creat_database() {
   FILE *file_p;
-  char database_name_p[50] = "test.dat";
+  char database_name_p[50];
   vehicle_management_t database = {0, "", 0, "", "", "", "", "", 0};
 
   printf("%s", "Please keyin database name, data quantity: ");
-  // scanf("%s", database_name_p);
+  scanf("%s", database_name_p);
 
   if ((file_p = fopen(database_name_p, "wb")) == NULL) {
     puts("File could not be opened.");
@@ -151,9 +151,9 @@ void creat_database() {
 void use_database(vehicle_management_t *data_p) {
   FILE *file_p;
   unsigned int count = 0;
-  char database_name_p[50] = "test.dat";
+  char database_name_p[50];
   printf("%s", "Please keyin database name: ");
-  // scanf("%s", database_name_p);
+  scanf("%s", database_name_p);
 
   if ((file_p = fopen(database_name_p, "rb")) == NULL) {
     puts("File could not be opened.");
