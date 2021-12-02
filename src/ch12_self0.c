@@ -493,10 +493,16 @@ void print_row_data(vehicle_management_t data) {
 }
 
 void write_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *count_p) {
+  FILE *file_p;
   puts("File is write...");
-  for (size_t i = 0; i < *count_p; i++) {
-    printf("%p row: %ld\n", &*(data_p + i), i);
-    write_row_data(file_name_p, *(data_p + i));
+  if ((file_p = fopen(file_name_p, "w")) == NULL) {
+    puts("File could not be opened");
+  } else {
+    fclose(file_p);
+    for (size_t i = 0; i < *count_p; i++) {
+      write_row_data(file_name_p, *(data_p + i));
+    }
+    printf("%p row: %u\n", &*(data_p + (*count_p - 1)), *count_p);
   }
 }
 
