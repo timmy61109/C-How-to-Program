@@ -226,9 +226,8 @@ unsigned int management_meun() {
 
 void management(vehicle_management_t *data_p) {
   unsigned int count = DATABASE;
-  print_data(data_p, &count);
   unsigned int choice = 119;
-  while (choice != 6) {
+  while (choice != 7) {
     switch (choice) {
       case 1: {
 
@@ -257,6 +256,15 @@ void management(vehicle_management_t *data_p) {
       }
 
       case 6: {
+        for (size_t i = 0; i < count; i++) {
+          if (data_p[i].number != 0) {
+            print_row_data(data_p[i]);
+          }
+        }
+        break;
+      }
+
+      case 7: {
         puts("Bye Bye~");
         break;
       }
@@ -269,9 +277,11 @@ void management(vehicle_management_t *data_p) {
           " 3    update an data\n"
           " 4    insert a new data\n"
           " 5    delete an data\n"
-          " 6    end program\n"
+          " 6    print data\n"
+          " 7    end program\n"
           " 119  help\n"
         );
+        break;
       }
 
       default: {
