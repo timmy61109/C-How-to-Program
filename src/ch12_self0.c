@@ -6,7 +6,7 @@ vehicle management
 #include <stdlib.h>
 #include <string.h>
 #define SIZE 3
-#define DATABASE 300
+#define DATABASE 500
 #define LICENSE_PLATE 22
 #define ENGINE 10
 #define NAME 22
@@ -72,6 +72,15 @@ int main() {
   print_data(data, &count);
   insert(data);
   print_data(data, &count);
+  update(data);
+  print_data(data, &count);
+  drop(data);
+  print_data(data, &count);
+  insert(data);
+  insert(data);
+  insert(data);
+  print_data(data, &count);
+  selete(data);
 }
 
 unsigned int init_menu() {
@@ -261,6 +270,7 @@ void insert(vehicle_management_t *data_p) {
       print_row_data(data_p[account - 1]);
 
     } else {
+      data_p[account - 1].number = account;
       keyin_row(&data_p[account - 1]);
     }
   }
