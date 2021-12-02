@@ -294,10 +294,9 @@ void drop(vehicle_management_t *data_p) {
 void update(vehicle_management_t *data_p) {
   unsigned int count = DATABASE;
   unsigned int account = 0;
-  vehicle_management_t data;
 
   printf("%s%u%s", "Enter number to update (1 - ", count, ")\n");
-  printf("%s", "\n (delete) >>> ");
+  printf("%s", "\n (update) >>> ");
   scanf("%d", &account);
   print_row_data(data_p[account - 1]);
 
@@ -305,12 +304,8 @@ void update(vehicle_management_t *data_p) {
     printf("Account #%d has no information.\n", account);
 
   } else {
-
-    keyin_row(&data);
-    print_row_data(data);
-
-    data_p[account - 1] = data;
-
+    data_p[account - 1].number = account;
+    keyin_row(&data_p[account - 1]);
   }
 }
 
