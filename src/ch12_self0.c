@@ -379,10 +379,7 @@ void keyin(vehicle_management_t *data_p, unsigned int *count_p) {
 }
 
 void keyin_row(vehicle_management_t *data_row_p) {
-  printf("%s", "\n輸入編號：");
-  scanf(" %u", &data_row_p->number);
-
-  printf("%s", "輸入車牌：");
+  printf("%s", "\n輸入車牌：");
   scanf(" %[^\n]", data_row_p->license_plate);
 
   printf("%s", "輸入引擎編號：");
