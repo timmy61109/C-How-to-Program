@@ -112,7 +112,7 @@ int main() {
       }
 
       default: {
-        puts("Incorrect choice, Please enter function number.(1~5, help is 9)");
+        puts("Incorrect choice, Please enter function number.(1~5, help is 119)");
         break;
       }
     }
