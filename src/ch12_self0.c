@@ -225,6 +225,27 @@ void use_database(vehicle_management_t *data_p) {
   printf("%s%s%s\n", "use ", database_name, " database");
 }
 
+void close_database(vehicle_management_t *data_p) {
+  FILE *file_p;
+  char database_name_p[50];
+  printf("%s", "Please keyin database name: ");
+  scanf("%s", database_name_p);
+
+  if ((file_p = fopen(database_name_p, "rb+")) == NULL) {
+    puts("File could not be opened.");
+
+  } else {
+    printf("%s\n", "svae file...");
+
+    for (size_t i = 0; i < DATABASE; i++) {
+      fseek(file_p, i * sizeof(vehicle_management_t), SEEK_SET);
+      fwrite(&data_p[i], sizeof(vehicle_management_t), 1, file_p);
+    }
+  }
+  fclose(file_p);
+  printf("%s%s%s", "database ", database_name_p, " is success.\n");
+}
+
 unsigned int management_meun() {
   printf("%s", "\n (management) > ");
   unsigned int management_menu_choice;
