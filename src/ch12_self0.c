@@ -35,6 +35,7 @@ unsigned int database_menu();
 void database(vehicle_management_t *data_p);
 void creat_database();
 void use_database(vehicle_management_t *data_p);
+void close_database(vehicle_management_t *data_p);
 
 // management
 unsigned int management_meun();
@@ -136,7 +137,7 @@ unsigned int database_menu() {
 void database(vehicle_management_t *data_p) {
   unsigned int choice = 119;
 
-  while (choice != 3) {
+  while (choice != 4) {
     switch (choice) {
       case 1:
         creat_database();
@@ -148,6 +149,11 @@ void database(vehicle_management_t *data_p) {
       }
 
       case 3: {
+        close_database(data_p);
+        break;
+      }
+
+      case 4: {
         puts("Bye Bye~");
         break;
       }
@@ -157,7 +163,8 @@ void database(vehicle_management_t *data_p) {
           "\nEnter request\n"
           " 1    create database, please keyin name\n"
           " 2    selete use database\n"
-          " 3    exit database\n"
+          " 3    close database\n"
+          " 4    exit\n"
           " 119  help\n"
         );
         break;
