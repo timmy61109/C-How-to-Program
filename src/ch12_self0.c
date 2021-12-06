@@ -50,7 +50,7 @@ void update(vehicle_management_t *data_p);
 void example(vehicle_management_t *data_p);
 
 // file merge to database
-void merge_menu();
+int merge_menu();
 void merge(char *file_name_p, char *database_name_p, unsigned int *count_p);
 void file_merge_database(char *file_name_p, char *database_name_p, unsigned int *count_p);
 void database_merge_file(char *file_name_p, char *database_name_p, unsigned int *count_p);
@@ -434,7 +434,7 @@ void example(vehicle_management_t *data_p) {
   }
 }
 
-void merge_menu() {
+int merge_menu() {
 }
 
 void merge(char *file_name_p, char *database_name_p, unsigned int *count_p) {
