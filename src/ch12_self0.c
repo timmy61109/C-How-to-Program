@@ -608,46 +608,54 @@ void write_row_data(char *file_name_p, vehicle_management_t data) {
   }
 }
 
-void read_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *count_p) {
+void read_data(file_argc_t *info_p) {
   FILE *file_p;
-  count_p = 0;
+  unsigned int count = 0;
+  char line[6600];
+  char *cut;
 
-  if ((file_p = fopen(file_name_p, "r")) == NULL) {
+  if ((file_p = fopen(info_p->file_name, "r")) == NULL) {
     puts("File could not be opened");
 
   } else {
-    fscanf(file_p, "%u%s%u%s%s%s%s%s%d",
-      &data_p->number,
-      data_p->license_plate,
-      &data_p->engine_number,
-      data_p->name,
-      data_p->id,
-      data_p->phone_number,
-      data_p->address,
-      data_p->date,
-      &data_p->amount_of_money
-    );
-    data_p++;
-    count_p++;
-    printf("%u\n", *count_p);
+    printf("%s\n", "compute file size...");
 
-    while (!feof(file_p)) {
-      fscanf(file_p, "%u%s%u%s%s%s%s%s%d",
-        &data_p->number,
-        data_p->license_plate,
-        &data_p->engine_number,
-        data_p->name,
-        data_p->id,
-        data_p->phone_number,
-        data_p->address,
-        data_p->date,
-        &data_p->amount_of_money
-      );
-      data_p++;
-      count_p++;
-      printf("%u\n", *count_p);
+    while (fgets(line, DATABASE, file_p) != NULL) {
+      cut = strtok(line, ",");
+      info_p->data[count].number = atoi(cut);
+
+      cut = strtok(NULL, "\",");
+      strcpy(info_p->data[count].license_plate, cut);
+
+      cut = strtok(NULL, ",\"");
+      info_p->data[count].engine_number = atoi(cut);
+
+      cut = strtok(NULL, "\",\"");
+      strcpy(info_p->data[count].name, cut);
+
+      cut = strtok(NULL, "\",\"");
+      strcpy(info_p->data[count].id, cut);
+
+      cut = strtok(NULL, "\",\"");
+      strcpy(info_p->data[count].phone_number, cut);
+
+      cut = strtok(NULL, "\",\"");
+      strcpy(info_p->data[count].address, cut);
+
+      cut = strtok(NULL, "\",");
+      strcpy(info_p->data[count].date, cut);
+
+      cut = strtok(NULL, ",\"");
+      info_p->data[count].amount_of_money = atoi(cut);
+
+      if (info_p->data[count].number != 0) {
+        print_row_data(info_p->data[count]);
+      }
+
+      if (count < DATABASE) {
+        count++;
+      }
     }
-    fclose(file_p);
+    info_p->count = count;
   }
-
 }
