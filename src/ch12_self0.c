@@ -82,66 +82,61 @@ int main() {
     "test.dat",
     DATABASE,
   };
-  // unsigned int choice = 119;
-  // while (choice != 5) {
-  //   switch (choice) {
-  //     case 1: {
-  //       puts("database");
-  //       database(data);
-  //       break;
-  //     }
-  //
-  //     case 2: {
-  //       puts("management");
-  //       management(data);
-  //       break;
-  //     }
-  //
-  //     case 3: {
-  //       for (size_t i = 0; i < DATABASE; i++) {
-  //         info.database_data[i] = data[i];
-  //       }
-  //       puts("merge");
-  //       merge(&info);
-  //       break;
-  //     }
-  //
-  //     case 4: {
-  //       puts("example");
-  //       example(data);
-  //       break;
-  //     }
-  //
-  //     case 5: {
-  //       puts("Bye Bye~");
-  //       break;
-  //     }
-  //
-  //     case 119: {
-  //       printf("%s",
-  //         "\nEnter request\n"
-  //         " 1    database\n"
-  //         " 2    management\n"
-  //         " 3    merge data\n"
-  //         " 4    example data\n"
-  //         " 5    end program\n"
-  //         " 119  help\n"
-  //       );
-  //       break;
-  //     }
-  //
-  //     default: {
-  //       puts("Incorrect choice, Please enter function number.(1~5, help is 119)");
-  //       break;
-  //     }
-  //   }
-  // choice = init_menu();
-  // }
-  use_database(data);
-  for (size_t i = 0; i < DATABASE; i++) {
-    info.database_data[i] = data[i];
+  unsigned int choice = 119;
+  while (choice != 5) {
+    switch (choice) {
+      case 1: {
+        puts("database");
+        database(data);
+        break;
+      }
+
+      case 2: {
+        puts("management");
+        management(data);
+        break;
+      }
+
+      case 3: {
+        for (size_t i = 0; i < DATABASE; i++) {
+          info.database_data[i] = data[i];
+        }
+        puts("merge");
+        merge(&info);
+        break;
+      }
+
+      case 4: {
+        puts("example");
+        example(data);
+        break;
+      }
+
+      case 5: {
+        puts("Bye Bye~");
+        break;
+      }
+
+      case 119: {
+        printf("%s",
+          "\nEnter request\n"
+          " 1    database\n"
+          " 2    management\n"
+          " 3    merge data\n"
+          " 4    example data\n"
+          " 5    end program\n"
+          " 119  help\n"
+        );
+        break;
+      }
+
+      default: {
+        puts("Incorrect choice, Please enter function number.(1~5, help is 119)");
+        break;
+      }
+    }
+  choice = init_menu();
   }
-  file_merge_data(&info);
 }
 
 unsigned int init_menu() {
@@ -542,6 +537,25 @@ void file_merge_data(file_argc_t *info_p) {
 
 void data_merge_file(file_argc_t *info_p) {
   read_data(info_p);
+  print_data(info_p->database_data, &info_p->count);
+  unsigned int _compare = 0;
+  for (size_t i = 0; i < info_p->count; i++) {
+    for (size_t j = 0; j < info_p->count; j++) {
+      _compare = compare(info_p->file_data[j], info_p->database_data[i]);
+    }
+    if ((info_p->file_data[i].number == 0) && _compare) {
+      info_p->file_data[i] = info_p->database_data[i];
+
+    } else {
+      for (size_t k = 0; k < (info_p->count - i); k++) {
+        if (info_p->file_data[i].number == 0) {
+          info_p->file_data[k + i] = info_p->database_data[i];
+        } else {
+          printf("%s\n", "The database is not 空間!!!");
+        }
+      }
+    }
+  }
 }
 
 void keyin(vehicle_management_t *data_p, unsigned int *count_p) {
