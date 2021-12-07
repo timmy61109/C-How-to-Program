@@ -442,6 +442,10 @@ void example(vehicle_management_t *data_p) {
 }
 
 int merge_menu() {
+  printf("%s", "\n (merge) > ");
+  unsigned int merge_menu_choice;
+  scanf("%u", &merge_menu_choice);
+  return merge_menu_choice;
 }
 
 void merge(file_argc_t *info_p) {
