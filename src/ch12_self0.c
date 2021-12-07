@@ -125,6 +125,16 @@ int main() {
     }
   choice = init_menu();
   }
+  file_argc_t info = {
+    "test.csv",
+    "test.dat",
+    DATABASE,
+  };
+  for (size_t i = 0; i < DATABASE; i++) {
+    info.data[i] = data[i];
+  }
+  read_data(&info);
+  print_data(info.data, &info.count);
 }
 
 unsigned int init_menu() {
