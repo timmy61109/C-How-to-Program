@@ -444,10 +444,45 @@ void example(vehicle_management_t *data_p) {
 int merge_menu() {
 }
 
-void merge(char *file_name_p, char *database_name_p, unsigned int *count_p) {
-  // vehicle_management_t data_p[*count_p];
+void merge(file_argc_t *info_p) {
+  unsigned int choice = 119;
+  while (choice != 4) {
+    switch (choice) {
+      case 1: {
 
-  // read_data(file_name_p, data_p, count_p);
+        file_merge_data(info_p);
+        break;
+      }
+
+      case 2: {
+        data_merge_file(info_p);
+        break;
+      }
+
+      case 3: {
+        puts("Bye Bye~");
+        break;
+      }
+
+      case 119: {
+        printf("%s",
+          "\nEnter request\n"
+          " 1    file merge to data\n"
+          " 2    data merge to file\n"
+          " 3    exit\n"
+          " 119  help\n"
+        );
+        break;
+      }
+
+      default: {
+        puts("Incorrect choice, please enter function number.");
+        break;
+      }
+    }
+    choice = management_meun();
+  }
+
 }
 
 void file_merge_database(
