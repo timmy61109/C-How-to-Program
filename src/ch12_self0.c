@@ -489,8 +489,8 @@ void file_merge_database(
     char *file_name_p, char *database_name_p, unsigned int *count_p) {
 }
 
-void database_merge_file(
-    char *file_name_p, char *database_name_p, unsigned int *count_p) {
+void data_merge_file(file_argc_t *info_p) {
+  read_data(info_p);
 }
 
 void keyin(vehicle_management_t *data_p, unsigned int *count_p) {
