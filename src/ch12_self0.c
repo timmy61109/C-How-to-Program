@@ -411,8 +411,8 @@ void example(vehicle_management_t *data_p) {
       "Lory L. Hash",
       "J262986562",
       "+1 7022986198",
-      "673 Cooks Mine Road Albuquerque, NM 87108",
-      "January 17, 1978",
+      "673 Cooks Mine Road Albuquerque NM 87108",
+      "January 17 1978",
       73200
     }, {
       2,
@@ -421,9 +421,9 @@ void example(vehicle_management_t *data_p) {
       "賀曉彤",
       "Q214131854",
       "+1 2149393884",
-      "4713 Deercove Drive Dallas, TX 75202",
-      "November 1, 1938",
-      812
+      "4713 Deercove Drive Dallas TX 75202",
+      "November 1 1938",
+      812000
     }, {
       3,
       "4916-1212-9727-7104",
@@ -431,8 +431,8 @@ void example(vehicle_management_t *data_p) {
       "Donna J. Johnson",
       "E129441704",
       "+1 6016561902",
-      "670 高雄市左營區吉利四街350號",
-      "February 2, 1999",
+      "670 高雄市左營區吉利四街400號",
+      "February 2 1999",
       114900
     }
   };
