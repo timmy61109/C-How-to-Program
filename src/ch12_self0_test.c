@@ -5,6 +5,7 @@ vehicle management
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "ch12_self0.c"
 #define SIZE 3
 #define DATABASE 300
 #define LICENSE_PLATE 22
@@ -16,149 +17,25 @@ vehicle management
 #define DATE 22
 #define MONEY 22
 
-typedef struct {
-  unsigned int number;
-  char license_plate[LICENSE_PLATE];
-  unsigned int engine_number;
-  char name[NAME];
-  char id[ID];
-  char phone_number[PHONE_NUMBER];
-  char address[ADDR];
-  char date[DATE];
-  int amount_of_money;
-} vehicle_management_t;
-
-typedef struct {
-  char file_name[50];
-  char database_name[50];
-  unsigned int count;
-  vehicle_management_t database_data[DATABASE];
-  vehicle_management_t file_data[DATABASE];
-} file_argc_t;
-
-unsigned int init_menu();
-
-// database
-unsigned int database_menu();
-void database(vehicle_management_t *data_p);
-void creat_database();
-void use_database(vehicle_management_t *data_p);
-void close_database(vehicle_management_t *data_p);
-
-// management
-unsigned int management_meun();
-void management(vehicle_management_t *data_p);
-void export_csv(vehicle_management_t *data_p);
-void insert(vehicle_management_t *data_p);
-void selete(vehicle_management_t *data_p);
-void drop(vehicle_management_t *data_p);
-void update(vehicle_management_t *data_p);
-
-// print example data
-void example(vehicle_management_t *data_p);
-
-// file merge to database
-int merge_menu();
-void merge(file_argc_t *info_p);
-void file_merge_data(file_argc_t *info_p);
-void data_merge_file(file_argc_t *info_p);
-
-// Share function
-void keyin(vehicle_management_t *data_p, unsigned int *count_p);
-void keyin_row(vehicle_management_t *data_row_p);
-void search(vehicle_management_t *data_p);
-void print_data(vehicle_management_t *data_p, unsigned int *count_p);
-void print_row_data(vehicle_management_t data);
-void write_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *count_p);
-void write_row_data(char *file_name_p, vehicle_management_t data);
-void read_data(file_argc_t *info_p);
-int compare(vehicle_management_t database_data_p, vehicle_management_t file_data_p);
-
-
 int main() {
-  vehicle_management_t data[DATABASE];
-  file_argc_t info = {
-    "test.csv",
-    "test.dat",
-    DATABASE,
-  };
-  // unsigned int choice = 119;
-  // while (choice != 5) {
-  //   switch (choice) {
-  //     case 1: {
-  //       puts("database");
-  //       database(data);
-  //       break;
-  //     }
-  //
-  //     case 2: {
-  //       puts("management");
-  //       management(data);
-  //       break;
-  //     }
-  //
-  //     case 3: {
-  //       for (size_t i = 0; i < DATABASE; i++) {
-  //         info.database_data[i] = data[i];
-  //       }
-  //       puts("merge");
-  //       merge(&info);
-  //       break;
-  //     }
-  //
-  //     case 4: {
-  //       puts("example");
-  //       example(data);
-  //       break;
-  //     }
-  //
-  //     case 5: {
-  //       puts("Bye Bye~");
-  //       break;
-  //     }
-  //
-  //     case 119: {
-  //       printf("%s",
-  //         "\nEnter request\n"
-  //         " 1    database\n"
-  //         " 2    management\n"
-  //         " 3    merge data\n"
-  //         " 4    example data\n"
-  //         " 5    end program\n"
-  //         " 119  help\n"
-  //       );
-  //       break;
-  //     }
-  //
-  //     default: {
-  //       puts("Incorrect choice, Please enter function number.(1~5, help is 119)");
-  //       break;
-  //     }
-  //   }
-  // choice = init_menu();
-  // }
-  use_database(data);
-  for (size_t i = 0; i < DATABASE; i++) {
-    info.database_data[i] = data[i];
-  }
-  file_merge_data(&info);
+
 }
 
-unsigned int init_menu() {
+unsigned int init_menu_test() {
   printf("%s", "\n > ");
   unsigned int init_menu_choice;
   scanf("%u", &init_menu_choice);
   return init_menu_choice;
 }
 
-unsigned int database_menu() {
+unsigned int database_menu_test() {
   printf("%s", "\n (database) > ");
   unsigned int database_menu_choice;
   scanf("%u", &database_menu_choice);
   return database_menu_choice;
 }
 
-void database(vehicle_management_t *data_p) {
+void database_test(vehicle_management_t *data_p) {
   unsigned int choice = 119;
 
   while (choice != 4) {
@@ -203,7 +80,7 @@ void database(vehicle_management_t *data_p) {
   }
 }
 
-void creat_database() {
+void creat_database_test() {
   FILE *file_p;
   char database_name[50];
   vehicle_management_t database = {0, "null", 0, "null", "null", "null", "null", "null", 0};
@@ -224,7 +101,7 @@ void creat_database() {
   fclose(file_p);
 }
 
-void use_database(vehicle_management_t *data_p) {
+void use_database_test(vehicle_management_t *data_p) {
   FILE *file_p;
   unsigned int count = 0;
   char database_name[50];
@@ -249,7 +126,7 @@ void use_database(vehicle_management_t *data_p) {
   printf("%s%s%s\n", "use ", database_name, " database");
 }
 
-void close_database(vehicle_management_t *data_p) {
+void close_database_test(vehicle_management_t *data_p) {
   FILE *file_p;
   char database_name_p[50];
   printf("%s", "Please keyin database name: ");
@@ -270,14 +147,14 @@ void close_database(vehicle_management_t *data_p) {
   printf("%s%s%s", "database ", database_name_p, " is success.\n");
 }
 
-unsigned int management_meun() {
+unsigned int management_meun_test() {
   printf("%s", "\n (management) > ");
   unsigned int management_menu_choice;
   scanf("%u", &management_menu_choice);
   return management_menu_choice;
 }
 
-void management(vehicle_management_t *data_p) {
+void management_test(vehicle_management_t *data_p) {
   unsigned int count = DATABASE;
   unsigned int choice = 119;
   while (choice != 7) {
@@ -346,7 +223,7 @@ void management(vehicle_management_t *data_p) {
   }
 }
 
-void export_csv(vehicle_management_t *data_p) {
+void export_csv_test(vehicle_management_t *data_p) {
   unsigned int count = DATABASE;
   char file_name[50];
   printf("%s", "Please keyin file name: ");
@@ -355,7 +232,7 @@ void export_csv(vehicle_management_t *data_p) {
 
 }
 
-void insert(vehicle_management_t *data_p) {
+void insert_test(vehicle_management_t *data_p) {
   unsigned int account = 0;
   unsigned int count = DATABASE;
   if (sizeof(data_p) == 0) {
@@ -376,7 +253,7 @@ void insert(vehicle_management_t *data_p) {
   }
 }
 
-void selete(vehicle_management_t *data_p) {
+void selete_test(vehicle_management_t *data_p) {
   unsigned int count = DATABASE;
   printf("%s%u%s", "Enter name search (1 - ", count, ")\n");
 
@@ -384,7 +261,7 @@ void selete(vehicle_management_t *data_p) {
   search(data_p);
 }
 
-void drop(vehicle_management_t *data_p) {
+void drop_test(vehicle_management_t *data_p) {
   unsigned int account = 0;
   vehicle_management_t temp = {0, "null", 0, "null", "null", "null", "null", "null", 0};
 
@@ -401,7 +278,7 @@ void drop(vehicle_management_t *data_p) {
   }
 }
 
-void update(vehicle_management_t *data_p) {
+void update_test(vehicle_management_t *data_p) {
   unsigned int count = DATABASE;
   unsigned int account = 0;
 
@@ -419,7 +296,7 @@ void update(vehicle_management_t *data_p) {
   }
 }
 
-void example(vehicle_management_t *data_p) {
+void example_test(vehicle_management_t *data_p) {
   vehicle_management_t create[SIZE] = {
     {
       1,
@@ -458,14 +335,14 @@ void example(vehicle_management_t *data_p) {
   }
 }
 
-int merge_menu() {
+unsigned int merge_menu_test() {
   printf("%s", "\n (merge) > ");
   unsigned int merge_menu_choice;
   scanf("%u", &merge_menu_choice);
   return merge_menu_choice;
 }
 
-void merge(file_argc_t *info_p) {
+void merge_test(file_argc_t *info_p) {
   char database_name[50];
   char file_name[50];
   unsigned int choice = 119;
@@ -517,29 +394,25 @@ void merge(file_argc_t *info_p) {
 
 }
 
-void file_merge_data(file_argc_t *info_p) {
-  read_data(info_p);
-  print_data(info_p->database_data, &info_p->count);
-  for (size_t i = 0; i < info_p->count; i++) {
-    for (size_t j = 0; j < info_p->count; j++) {
-      unsigned int compare_a = compare(info_p->database_data[i], info_p->file_data[j]);
-      unsigned int compare_b = compare(info_p->database_data[j], info_p->file_data[i]);
-      if (!(compare_a && compare_b)) {
-        printf("%d\n", compare_a && compare_b);
-      }
-    }
+void file_merge_data_test(file_argc_t *info_p) {
+  vehicle_management_t data[DATABASE];
+  file_argc_t info = {
+    "test.csv",
+    "test.dat",
+    DATABASE,
+  };
+  use_database(data);
+  for (size_t i = 0; i < DATABASE; i++) {
+    info.database_data[i] = data[i];
   }
-  // if ((info_p->database_data[i].number == 0) && (info_p->file_data[j].number != 0)) {
-  //   info_p->database_data[i] = info_p->file_data[j];
-  // } else if ((info_p->database_data[i].number != 0) && (info_p->file_data[j].number != 0)) {
-  // }
+  file_merge_data(&info);
 }
 
-void data_merge_file(file_argc_t *info_p) {
+void data_merge_file_test(file_argc_t *info_p) {
   read_data(info_p);
 }
 
-void keyin(vehicle_management_t *data_p, unsigned int *count_p) {
+void keyin_test(vehicle_management_t *data_p, unsigned int *count_p) {
 
   for (size_t i = 0; i < *count_p; i++) {
     keyin_row((data_p + i));
@@ -547,7 +420,7 @@ void keyin(vehicle_management_t *data_p, unsigned int *count_p) {
   }
 }
 
-void keyin_row(vehicle_management_t *data_row_p) {
+void keyin_row_test(vehicle_management_t *data_row_p) {
   printf("%s", "\n輸入車牌：");
   scanf(" %[^\n]", data_row_p->license_plate);
 
@@ -574,7 +447,7 @@ void keyin_row(vehicle_management_t *data_row_p) {
 
 }
 
-void search(vehicle_management_t *data_p) {
+void search_test(vehicle_management_t *data_p) {
   vehicle_management_t null = {0, "null", 0, "null", "null", "null", "null", "null", 0};
   char search_name[NAME];
   unsigned int count = 0;
@@ -598,14 +471,14 @@ void search(vehicle_management_t *data_p) {
   }
 }
 
-void print_data(vehicle_management_t *data_p, unsigned int *count_p) {
+void print_data_test(vehicle_management_t *data_p, unsigned int *count_p) {
   for (size_t i = 0; i < *count_p; i++) {
     printf("%p\n", &*(data_p + i));
     print_row_data(*(data_p + i));
   }
 }
 
-void print_row_data(vehicle_management_t data) {
+void print_row_data_test(vehicle_management_t data) {
   printf("%-10u%-22s%-15u%-20s%-12s%-17s%-64s%-22s%-20u\n",
     data.number,
     data.license_plate,
@@ -619,7 +492,7 @@ void print_row_data(vehicle_management_t data) {
   );
 }
 
-void write_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *count_p) {
+void write_data_test(char *file_name_p, vehicle_management_t *data_p, unsigned int *count_p) {
   FILE *file_p;
   puts("File is write...");
   if ((file_p = fopen(file_name_p, "w")) == NULL) {
@@ -633,7 +506,7 @@ void write_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *c
   }
 }
 
-void write_row_data(char *file_name_p, vehicle_management_t data) {
+void write_row_data_test(char *file_name_p, vehicle_management_t data) {
   FILE *file_p;
 
   if ((file_p = fopen(file_name_p, "a")) == NULL) {
@@ -654,7 +527,7 @@ void write_row_data(char *file_name_p, vehicle_management_t data) {
   }
 }
 
-void read_data(file_argc_t *info_p) {
+void read_data_test(file_argc_t *info_p) {
   FILE *file_p;
   unsigned int count = 0;
   char line[7000];
@@ -706,32 +579,29 @@ void read_data(file_argc_t *info_p) {
   }
 }
 
-int compare(vehicle_management_t database_data_p, vehicle_management_t file_data_p) {
-  unsigned int license_plate = strcmp(
-    database_data_p.license_plate,
-    file_data_p.license_plate
-  );
-  unsigned int engine_number = database_data_p.engine_number == file_data_p.engine_number;
-  unsigned int name = strcmp(
-    database_data_p.name,
-    file_data_p.name
-  );
-  unsigned int id = strcmp(
-    database_data_p.id,
-    file_data_p.id
-  );
-  unsigned int phone_number = strcmp(
-    database_data_p.phone_number,
-    file_data_p.phone_number
-  );
-  unsigned int address = strcmp(
-    database_data_p.address,
-    file_data_p.address
-  );
-  unsigned int date = strcmp(
-    database_data_p.date,
-    file_data_p.date
-  );
-  unsigned int amount_of_money = database_data_p.amount_of_money == file_data_p.amount_of_money;
-  return license_plate && engine_number && name && id && phone_number && address && date && amount_of_money;
+int compare_test() {
+  unsigned int _compare = 0;
+  vehicle_management_t data[DATABASE];
+  file_argc_t info = {
+    "test.csv",
+    "test.dat",
+    DATABASE,
+  };
+  use_database(data);
+
+  for (size_t i = 0; i < info.count; i++) {
+    for (size_t j = 0; j < info.count; j++) {
+      _compare = compare(info.database_data[j], info.file_data[i]);
+    }
+    if ((info.database_data[i].number == 0) && _compare) {
+      info.database_data[i] = info.file_data[i];
+
+    } else {
+      for (size_t k = 0; k < (info.count - i); k++) {
+        if (info.database_data[i].number == 0) {
+          info.database_data[i] = info.file_data[i];
+        }
+      }
+    }
+  }
 }

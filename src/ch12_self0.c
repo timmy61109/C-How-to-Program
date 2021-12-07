@@ -58,7 +58,7 @@ void update(vehicle_management_t *data_p);
 void example(vehicle_management_t *data_p);
 
 // file merge to database
-int merge_menu();
+unsigned int merge_menu();
 void merge(file_argc_t *info_p);
 void file_merge_data(file_argc_t *info_p);
 void data_merge_file(file_argc_t *info_p);
@@ -458,7 +458,7 @@ void example(vehicle_management_t *data_p) {
   }
 }
 
-int merge_menu() {
+unsigned int merge_menu() {
   printf("%s", "\n (merge) > ");
   unsigned int merge_menu_choice;
   scanf("%u", &merge_menu_choice);
@@ -520,19 +520,24 @@ void merge(file_argc_t *info_p) {
 void file_merge_data(file_argc_t *info_p) {
   read_data(info_p);
   print_data(info_p->database_data, &info_p->count);
+  unsigned int _compare = 0;
   for (size_t i = 0; i < info_p->count; i++) {
     for (size_t j = 0; j < info_p->count; j++) {
-      unsigned int compare_a = compare(info_p->database_data[i], info_p->file_data[j]);
-      unsigned int compare_b = compare(info_p->database_data[j], info_p->file_data[i]);
-      if (!(compare_a && compare_b)) {
-        printf("%d\n", compare_a && compare_b);
+      _compare = compare(info_p->database_data[j], info_p->file_data[i]);
+    }
+    if ((info_p->database_data[i].number == 0) && _compare) {
+      info_p->database_data[i] = info_p->file_data[i];
+
+    } else {
+      for (size_t k = 0; k < (info_p->count - i); k++) {
+        if (info_p->database_data[i].number == 0) {
+          info_p->database_data[k + i] = info_p->file_data[i];
+        } else {
+          printf("%s\n", "The database is not 空間!!!");
+        }
       }
     }
   }
-  // if ((info_p->database_data[i].number == 0) && (info_p->file_data[j].number != 0)) {
-  //   info_p->database_data[i] = info_p->file_data[j];
-  // } else if ((info_p->database_data[i].number != 0) && (info_p->file_data[j].number != 0)) {
-  // }
 }
 
 void data_merge_file(file_argc_t *info_p) {
@@ -707,31 +712,31 @@ void read_data(file_argc_t *info_p) {
 }
 
 int compare(vehicle_management_t database_data_p, vehicle_management_t file_data_p) {
-  unsigned int license_plate = strcmp(
+  int license_plate = strcmp(
     database_data_p.license_plate,
     file_data_p.license_plate
   );
-  unsigned int engine_number = database_data_p.engine_number == file_data_p.engine_number;
-  unsigned int name = strcmp(
+  int engine_number = database_data_p.engine_number == file_data_p.engine_number;
+  int name = strcmp(
     database_data_p.name,
     file_data_p.name
   );
-  unsigned int id = strcmp(
+  int id = strcmp(
     database_data_p.id,
     file_data_p.id
   );
-  unsigned int phone_number = strcmp(
+  int phone_number = strcmp(
     database_data_p.phone_number,
     file_data_p.phone_number
   );
-  unsigned int address = strcmp(
+  int address = strcmp(
     database_data_p.address,
     file_data_p.address
   );
-  unsigned int date = strcmp(
+  int date = strcmp(
     database_data_p.date,
     file_data_p.date
   );
-  unsigned int amount_of_money = database_data_p.amount_of_money == file_data_p.amount_of_money;
-  return license_plate && engine_number && name && id && phone_number && address && date && amount_of_money;
+  int amount_of_money = database_data_p.amount_of_money == file_data_p.amount_of_money;
+  return license_plate || !engine_number || name || id || phone_number || address || date || !amount_of_money;
 }
