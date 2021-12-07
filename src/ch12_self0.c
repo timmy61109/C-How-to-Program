@@ -189,7 +189,7 @@ void database(vehicle_management_t *data_p) {
 void creat_database() {
   FILE *file_p;
   char database_name_p[50];
-  vehicle_management_t database = {0, "", 0, "", "", "", "", "", 0};
+  vehicle_management_t database = {0, "null", 0, "null", "null", "null", "null", "null", 0};
 
   printf("%s", "Please keyin database name, data quantity: ");
   scanf("%s", database_name_p);
@@ -369,7 +369,7 @@ void selete(vehicle_management_t *data_p) {
 
 void drop(vehicle_management_t *data_p) {
   unsigned int account = 0;
-  vehicle_management_t temp = {0, "", 0, "", "", "", "", "", 0};
+  vehicle_management_t temp = {0, "null", 0, "null", "null", "null", "null", "null", 0};
 
   printf("%s%u%s\n", "Enter account to delete (1 - ", DATABASE, ")");
   printf("%s", "\n (delete) >>> ");
@@ -529,7 +529,7 @@ void keyin_row(vehicle_management_t *data_row_p) {
 }
 
 void search(vehicle_management_t *data_p) {
-  vehicle_management_t null = {0, "", 0, "", "", "", "", "", 0};
+  vehicle_management_t null = {0, "null", 0, "null", "null", "null", "null", "null", 0};
   char search_name[NAME];
   unsigned int count = 0;
   scanf(" %[^\n]", search_name);
@@ -560,7 +560,7 @@ void print_data(vehicle_management_t *data_p, unsigned int *count_p) {
 }
 
 void print_row_data(vehicle_management_t data) {
-  printf("%-10u%-22s%-15u%-10s%-12s%-17s%-64s%-22s%-20u\n",
+  printf("%-10u%-22s%-15u%-20s%-12s%-17s%-64s%-22s%-20u\n",
     data.number,
     data.license_plate,
     data.engine_number,
@@ -593,7 +593,7 @@ void write_row_data(char *file_name_p, vehicle_management_t data) {
   if ((file_p = fopen(file_name_p, "a")) == NULL) {
     puts("File could not be opened");
   } else {
-    fprintf(file_p, "%u, \"%s\", %u, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", %u\n",
+    fprintf(file_p, "%u,\"%s\",%u,\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%u\n",
       data.number,
       data.license_plate,
       data.engine_number,
