@@ -532,10 +532,10 @@ void keyin_row(vehicle_management_t *data_row_p) {
   scanf(" %[^\n]", data_row_p->phone_number);
 
   printf("%s", "輸入地址：");
-  scanf(" %[^\n\",]", data_row_p->address);
+  scanf(" %[^\n,\"]", data_row_p->address);
 
   printf("%s", "輸入時間：");
-  scanf(" %[^\n]", data_row_p->date);
+  scanf(" %[^\n,\"]", data_row_p->date);
 
   printf("%s", "輸入租金：");
   scanf(" %u", &data_row_p->amount_of_money);
