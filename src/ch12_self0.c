@@ -259,6 +259,8 @@ void close_database(vehicle_management_t *data_p) {
     for (size_t i = 0; i < DATABASE; i++) {
       fseek(file_p, i * sizeof(vehicle_management_t), SEEK_SET);
       fwrite(&data_p[i], sizeof(vehicle_management_t), 1, file_p);
+      vehicle_management_t null = {0, "null", 0, "null", "null", "null", "null", "null", 0};
+      data_p[i] = null;
     }
   }
   fclose(file_p);
