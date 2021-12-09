@@ -203,7 +203,7 @@ void creat_database() {
   char database_name[50];
   vehicle_management_t database = {0, "null", 0, "null", "null", "null", "null", "null", 0};
 
-  printf("%s", "Please keyin database name, data quantity: ");
+  printf("%s", "Please keyin database name: ");
   scanf("%s", database_name);
 
   if ((file_p = fopen(database_name, "wb")) == NULL) {
@@ -464,7 +464,7 @@ void merge(file_argc_t *info_p) {
   char database_name[50];
   char file_name[50];
   unsigned int choice = 119;
-  printf("%s", "Please keyin database name, data quantity: ");
+  printf("%s", "Please keyin database name: ");
   scanf("%s", database_name);
   printf("%s", "Please keyin file name: ");
   scanf("%s", file_name);
