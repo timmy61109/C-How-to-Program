@@ -517,7 +517,8 @@ void merge(file_argc_t *info_p) {
 
 void file_merge_data(file_argc_t *info_p) {
   read_data(info_p);
-  print_data(info_p->database_data, &info_p->count);
+  print_part_of_data(info_p);
+
   unsigned int _compare = 0;
   for (size_t i = 0; i < info_p->count; i++) {
     for (size_t j = 0; j < info_p->count; j++) {
@@ -534,6 +535,7 @@ void file_merge_data(file_argc_t *info_p) {
       }
     }
   }
+  print_part_of_data(info_p);
 }
 
 void data_merge_file(file_argc_t *info_p) {
