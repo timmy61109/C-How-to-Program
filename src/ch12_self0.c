@@ -727,33 +727,33 @@ void read_data(file_argc_t *info_p) {
   }
 }
 
-int compare(vehicle_management_t database_data_p, vehicle_management_t file_data_p) {
+int compare(vehicle_management_t source_data_p, vehicle_management_t target_data_p) {
   int license_plate = strcmp(
-    database_data_p.license_plate,
-    file_data_p.license_plate
+    source_data_p.license_plate,
+    target_data_p.license_plate
   );
-  int engine_number = database_data_p.engine_number == file_data_p.engine_number;
+  int engine_number = source_data_p.engine_number == target_data_p.engine_number;
   int name = strcmp(
-    database_data_p.name,
-    file_data_p.name
+    source_data_p.name,
+    target_data_p.name
   );
   int id = strcmp(
-    database_data_p.id,
-    file_data_p.id
+    source_data_p.id,
+    target_data_p.id
   );
   int phone_number = strcmp(
-    database_data_p.phone_number,
-    file_data_p.phone_number
+    source_data_p.phone_number,
+    target_data_p.phone_number
   );
   int address = strcmp(
-    database_data_p.address,
-    file_data_p.address
+    source_data_p.address,
+    target_data_p.address
   );
   int date = strcmp(
-    database_data_p.date,
-    file_data_p.date
+    source_data_p.date,
+    target_data_p.date
   );
-  int amount_of_money = database_data_p.amount_of_money == file_data_p.amount_of_money;
+  int amount_of_money = source_data_p.amount_of_money == target_data_p.amount_of_money;
   return license_plate || !engine_number || name || id || phone_number || address || date || !amount_of_money;
 }
 
