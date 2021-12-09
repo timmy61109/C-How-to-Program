@@ -557,6 +557,7 @@ void data_merge_file(file_argc_t *info_p) {
       }
     }
   }
+  printf("%s\n", "data merge file is success");
 }
 
 void keyin(vehicle_management_t *data_p, unsigned int *count_p) {
