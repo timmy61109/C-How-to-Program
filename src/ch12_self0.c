@@ -527,8 +527,6 @@ void file_merge_data(file_argc_t *info_p) {
 
     } else {
       for (size_t k = 0; k < (info_p->count - i); k++) {
-        } else {
-          printf("%s\n", "The database is not 空間!!!");
         if (info_p->source_data[k + i].number == 0) {
           info_p->source_data[k + i] = info_p->target_data[i];
         }
@@ -549,8 +547,6 @@ void data_merge_file(file_argc_t *info_p) {
       info_p->target_data[i] = info_p->source_data[i];
 
     } else {
-        } else {
-          printf("%s\n", "The database is not 空間!!!");
       for (size_t k = 1; k < (info_p->count - i); k++) {
         if (info_p->target_data[k + i].number == 0) {
           info_p->target_data[k + i] = info_p->source_data[i];
