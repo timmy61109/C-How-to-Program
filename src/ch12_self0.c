@@ -32,8 +32,8 @@ typedef struct {
   char file_name[50];
   char database_name[50];
   unsigned int count;
-  vehicle_management_t database_data[DATABASE];
-  vehicle_management_t file_data[DATABASE];
+  vehicle_management_t source_data[DATABASE];
+  vehicle_management_t target_data[DATABASE];
 } file_argc_t;
 
 unsigned int init_menu();
@@ -99,7 +99,7 @@ int main() {
 
       case 3: {
         for (size_t i = 0; i < DATABASE; i++) {
-          info.database_data[i] = data[i];
+          info.source_data[i] = data[i];
         }
         puts("merge");
         merge(&info);
@@ -518,17 +518,17 @@ void file_merge_data(file_argc_t *info_p) {
   unsigned int _compare = 0;
   for (size_t i = 0; i < info_p->count; i++) {
     for (size_t j = 0; j < info_p->count; j++) {
-      _compare = compare(info_p->database_data[j], info_p->file_data[i]);
+      _compare = compare(info_p->source_data[j], info_p->target_data[i]);
     }
-    if ((info_p->database_data[i].number == 0) && _compare) {
-      info_p->database_data[i] = info_p->file_data[i];
+    if ((info_p->source_data[i].number == 0) && _compare) {
+      info_p->source_data[i] = info_p->target_data[i];
 
     } else {
       for (size_t k = 0; k < (info_p->count - i); k++) {
-        if (info_p->database_data[i].number == 0) {
-          info_p->database_data[k + i] = info_p->file_data[i];
         } else {
           printf("%s\n", "The database is not 空間!!!");
+        if (info_p->source_data[k + i].number == 0) {
+          info_p->source_data[k + i] = info_p->target_data[i];
         }
       }
     }
@@ -537,21 +537,21 @@ void file_merge_data(file_argc_t *info_p) {
 
 void data_merge_file(file_argc_t *info_p) {
   read_data(info_p);
-  print_data(info_p->database_data, &info_p->count);
+  print_data(info_p->source_data, &info_p->count);
   unsigned int _compare = 0;
   for (size_t i = 0; i < info_p->count; i++) {
     for (size_t j = 0; j < info_p->count; j++) {
-      _compare = compare(info_p->file_data[j], info_p->database_data[i]);
+      _compare = compare(info_p->target_data[j], info_p->source_data[i]);
     }
-    if ((info_p->file_data[i].number == 0) && _compare) {
-      info_p->file_data[i] = info_p->database_data[i];
+    if ((info_p->target_data[i].number == 0) && _compare) {
+      info_p->target_data[i] = info_p->source_data[i];
 
     } else {
-      for (size_t k = 0; k < (info_p->count - i); k++) {
-        if (info_p->file_data[i].number == 0) {
-          info_p->file_data[k + i] = info_p->database_data[i];
         } else {
           printf("%s\n", "The database is not 空間!!!");
+      for (size_t k = 1; k < (info_p->count - i); k++) {
+        if (info_p->target_data[k + i].number == 0) {
+          info_p->target_data[k + i] = info_p->source_data[i];
         }
       }
     }
@@ -687,34 +687,34 @@ void read_data(file_argc_t *info_p) {
 
     while (fgets(line, DATABASE, file_p) != NULL) {
       cut = strtok(line, ",");
-      info_p->file_data[count].number = atoi(cut);
+      info_p->target_data[count].number = atoi(cut);
 
       cut = strtok(NULL, "\",");
-      strcpy(info_p->file_data[count].license_plate, cut);
+      strcpy(info_p->target_data[count].license_plate, cut);
 
       cut = strtok(NULL, ",\"");
-      info_p->file_data[count].engine_number = atoi(cut);
+      info_p->target_data[count].engine_number = atoi(cut);
 
       cut = strtok(NULL, "\",\"");
-      strcpy(info_p->file_data[count].name, cut);
+      strcpy(info_p->target_data[count].name, cut);
 
       cut = strtok(NULL, "\",\"");
-      strcpy(info_p->file_data[count].id, cut);
+      strcpy(info_p->target_data[count].id, cut);
 
       cut = strtok(NULL, "\",\"");
-      strcpy(info_p->file_data[count].phone_number, cut);
+      strcpy(info_p->target_data[count].phone_number, cut);
 
       cut = strtok(NULL, "\",\"");
-      strcpy(info_p->file_data[count].address, cut);
+      strcpy(info_p->target_data[count].address, cut);
 
       cut = strtok(NULL, "\",");
-      strcpy(info_p->file_data[count].date, cut);
+      strcpy(info_p->target_data[count].date, cut);
 
       cut = strtok(NULL, ",\"");
-      info_p->file_data[count].amount_of_money = atoi(cut);
+      info_p->target_data[count].amount_of_money = atoi(cut);
 
-      if (info_p->file_data[count].number != 0) {
-        print_row_data(info_p->file_data[count]);
+      if (info_p->target_data[count].number != 0) {
+        print_row_data(info_p->target_data[count]);
       }
 
       if (count < DATABASE) {
