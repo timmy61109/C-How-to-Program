@@ -73,6 +73,7 @@ void write_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *c
 void write_row_data(char *file_name_p, vehicle_management_t data);
 void read_data(file_argc_t *info_p);
 int compare(vehicle_management_t database_data_p, vehicle_management_t file_data_p);
+void print_part_of_data(file_argc_t *info_p);
 
 
 int main() {
@@ -751,4 +752,13 @@ int compare(vehicle_management_t database_data_p, vehicle_management_t file_data
   );
   int amount_of_money = database_data_p.amount_of_money == file_data_p.amount_of_money;
   return license_plate || !engine_number || name || id || phone_number || address || date || !amount_of_money;
+}
+
+void print_part_of_data(file_argc_t *info_p) {
+  printf("%s\n", "data merge file is success");
+  for (size_t i = 0; i < info_p->count; i++) {
+    if (info_p->source_data[i].number != 0) {
+      print_row_data(info_p->source_data[i]);
+    }
+  }
 }
