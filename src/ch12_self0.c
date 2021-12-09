@@ -475,7 +475,7 @@ void merge(file_argc_t *info_p) {
     info_p->file_name[i] = file_name[i];
     info_p->database_name[i] = database_name[i];
   }
-  while (choice != 4) {
+  while (choice != 3) {
     switch (choice) {
       case 1: {
 
