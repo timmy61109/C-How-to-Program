@@ -499,7 +499,14 @@ void merge(file_argc_t *info_p) {
 }
 
 void file_merge_data(file_argc_t *info_p) {
+  use_database(info_p->target_data);
+
+  printf("%s", "Please keyin sources file name: ");
+  scanf("%s", info_p->file_name);
   read_data(info_p);
+
+  print_part_of_data(info_p);
+  source_merge_to_target(info_p->source_data, info_p->target_data, &info_p->count);
   print_part_of_data(info_p);
 
   unsigned int _compare = 0;
