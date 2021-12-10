@@ -77,7 +77,6 @@ void print_part_of_data(file_argc_t *info_p);
 
 
 int main() {
-  vehicle_management_t data[DATABASE];
   file_argc_t info = {
     "test.csv",
     "test.dat",
@@ -88,7 +87,7 @@ int main() {
     switch (choice) {
       case 1: {
         puts("database");
-        database(data);
+        database(info.target_data);
         break;
       }
 
@@ -109,7 +108,7 @@ int main() {
 
       case 4: {
         puts("example");
-        example(data);
+        example(info.target_data);
         break;
       }
 
@@ -282,27 +281,27 @@ void management(file_argc_t *info_p) {
     switch (choice) {
       case 1: {
 
-        export_csv(data_p);
+        export_csv(info_p->target_data);
         break;
       }
 
       case 2: {
-        selete(data_p);
+        selete(info_p->target_data);
         break;
       }
 
       case 3: {
-        update(data_p);
+        update(info_p->target_data);
         break;
       }
 
       case 4: {
-        insert(data_p);
+        insert(info_p->target_data);
         break;
       }
 
       case 5: {
-        drop(data_p);
+        drop(info_p->target_data);
         break;
       }
 
