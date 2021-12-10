@@ -273,7 +273,6 @@ unsigned int management_meun() {
   return management_menu_choice;
 }
 
-  unsigned int count = DATABASE;
 void management(file_argc_t *info_p) {
   unsigned int choice = 119;
   while (choice != 7) {
