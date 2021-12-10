@@ -62,6 +62,8 @@ unsigned int merge_menu();
 void merge(file_argc_t *info_p);
 void file_merge_data(file_argc_t *info_p);
 void data_merge_file(file_argc_t *info_p);
+void source_merge_to_target(vehicle_management_t *source_data_p,
+    vehicle_management_t *target_data_p, unsigned int *count_p);
 
 // Share function
 void keyin(vehicle_management_t *data_p, unsigned int *count_p);
@@ -537,26 +539,26 @@ void file_merge_data(file_argc_t *info_p) {
   print_part_of_data(info_p);
 }
 
-void data_merge_file(file_argc_t *info_p) {
-  read_data(info_p);
-  print_data(info_p->source_data, &info_p->count);
+void source_merge_to_target(vehicle_management_t *source_data_p,
+    vehicle_management_t *target_data_p, unsigned int *count_p) {
   unsigned int _compare = 0;
-  for (size_t i = 0; i < info_p->count; i++) {
-    for (size_t j = 0; j < info_p->count; j++) {
-      _compare = compare(info_p->target_data[j], info_p->source_data[i]);
+  for (size_t i = 0; i < *count_p; i++) {
+    for (size_t j = 0; j < *count_p; j++) {
+      _compare = compare(target_data_p[j], source_data_p[i]);
     }
-    if ((info_p->target_data[i].number == 0) && _compare) {
-      info_p->target_data[i] = info_p->source_data[i];
+    if ((target_data_p[i].number == 0) && _compare) {
+      target_data_p[i] = source_data_p[i];
 
     } else {
-      for (size_t k = 1; k < (info_p->count - i); k++) {
-        if (info_p->target_data[k + i].number == 0) {
-          info_p->target_data[k + i] = info_p->source_data[i];
+      for (size_t k = 0; k < (*count_p - i); k++) {
+        if (target_data_p[k + i].number == 0) {
+          target_data_p[k + i] = source_data_p[i];
         }
       }
     }
   }
   printf("%s\n", "data merge file is success");
+
 }
 
 void keyin(vehicle_management_t *data_p, unsigned int *count_p) {
