@@ -509,23 +509,25 @@ void file_merge_data(file_argc_t *info_p) {
   source_merge_to_target(info_p->source_data, info_p->target_data, &info_p->count);
   print_part_of_data(info_p);
 
-  unsigned int _compare = 0;
-  for (size_t i = 0; i < info_p->count; i++) {
-    for (size_t j = 0; j < info_p->count; j++) {
-      _compare = compare(info_p->source_data[j], info_p->target_data[i]);
-    }
-    if ((info_p->source_data[i].number == 0) && _compare) {
-      info_p->source_data[i] = info_p->target_data[i];
+  write_data(info_p->file_name, info_p->target_data, &info_p->count);
+}
 
-    } else {
-      for (size_t k = 0; k < (info_p->count - i); k++) {
-        if (info_p->source_data[k + i].number == 0) {
-          info_p->source_data[k + i] = info_p->target_data[i];
-        }
-      }
-    }
+void data_merge_file(file_argc_t *info_p) {
+  printf("%s", "Please keyin target file name: ");
+  scanf("%s", info_p->file_name);
+  read_data(info_p);
+
+  for (size_t i = 0; i < info_p->count; i++) {
+    info_p->target_data[i] = info_p->source_data[i];
   }
+
+  use_database(info_p->source_data);
+
   print_part_of_data(info_p);
+  source_merge_to_target(info_p->source_data, info_p->target_data, &info_p->count);
+  print_part_of_data(info_p);
+
+  write_data(info_p->file_name, info_p->target_data, &info_p->count);
 }
 
 void source_merge_to_target(vehicle_management_t *source_data_p,
