@@ -100,9 +100,6 @@ int main() {
       }
 
       case 3: {
-        for (size_t i = 0; i < DATABASE; i++) {
-          info.source_data[i] = data[i];
-        }
         puts("merge");
         merge(&info);
         break;
