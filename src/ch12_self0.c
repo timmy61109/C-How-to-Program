@@ -47,7 +47,7 @@ void close_database(vehicle_management_t *data_p);
 
 // management
 unsigned int management_meun();
-void management(vehicle_management_t *data_p);
+void management(file_argc_t *info_p);
 void export_csv(vehicle_management_t *data_p);
 void insert(vehicle_management_t *data_p);
 void selete(vehicle_management_t *data_p);
@@ -94,7 +94,7 @@ int main() {
 
       case 2: {
         puts("management");
-        management(data);
+        management(&info);
         break;
       }
 
@@ -275,8 +275,8 @@ unsigned int management_meun() {
   return management_menu_choice;
 }
 
-void management(vehicle_management_t *data_p) {
   unsigned int count = DATABASE;
+void management(file_argc_t *info_p) {
   unsigned int choice = 119;
   while (choice != 7) {
     switch (choice) {
