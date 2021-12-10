@@ -672,34 +672,34 @@ void read_data(file_argc_t *info_p) {
 
     while (fgets(line, DATABASE, file_p) != NULL) {
       cut = strtok(line, ",");
-      info_p->target_data[count].number = atoi(cut);
+      info_p->source_data[count].number = atoi(cut);
 
       cut = strtok(NULL, "\",");
-      strcpy(info_p->target_data[count].license_plate, cut);
+      strcpy(info_p->source_data[count].license_plate, cut);
 
       cut = strtok(NULL, ",\"");
-      info_p->target_data[count].engine_number = atoi(cut);
+      info_p->source_data[count].engine_number = atoi(cut);
 
       cut = strtok(NULL, "\",\"");
-      strcpy(info_p->target_data[count].name, cut);
+      strcpy(info_p->source_data[count].name, cut);
 
       cut = strtok(NULL, "\",\"");
-      strcpy(info_p->target_data[count].id, cut);
+      strcpy(info_p->source_data[count].id, cut);
 
       cut = strtok(NULL, "\",\"");
-      strcpy(info_p->target_data[count].phone_number, cut);
+      strcpy(info_p->source_data[count].phone_number, cut);
 
       cut = strtok(NULL, "\",\"");
-      strcpy(info_p->target_data[count].address, cut);
+      strcpy(info_p->source_data[count].address, cut);
 
       cut = strtok(NULL, "\",");
-      strcpy(info_p->target_data[count].date, cut);
+      strcpy(info_p->source_data[count].date, cut);
 
       cut = strtok(NULL, ",\"");
-      info_p->target_data[count].amount_of_money = atoi(cut);
+      info_p->source_data[count].amount_of_money = atoi(cut);
 
-      if (info_p->target_data[count].number != 0) {
-        print_row_data(info_p->target_data[count]);
+      if (info_p->source_data[count].number != 0) {
+        print_row_data(info_p->source_data[count]);
       }
 
       if (count < DATABASE) {
