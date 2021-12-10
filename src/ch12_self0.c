@@ -468,6 +468,7 @@ void merge(file_argc_t *info_p) {
       }
 
       case 2: {
+
         data_merge_file(info_p);
         break;
       }
