@@ -457,18 +457,8 @@ unsigned int merge_menu() {
 }
 
 void merge(file_argc_t *info_p) {
-  char database_name[50];
-  char file_name[50];
   unsigned int choice = 119;
-  printf("%s", "Please keyin database name: ");
-  scanf("%s", database_name);
-  printf("%s", "Please keyin file name: ");
-  scanf("%s", file_name);
 
-  for (size_t i = 0; i < 50; i++) {
-    info_p->file_name[i] = file_name[i];
-    info_p->database_name[i] = database_name[i];
-  }
   while (choice != 3) {
     switch (choice) {
       case 1: {
