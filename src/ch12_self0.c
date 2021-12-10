@@ -304,11 +304,7 @@ void management(file_argc_t *info_p) {
       }
 
       case 6: {
-        for (size_t i = 0; i < count; i++) {
-          if (data_p[i].number != 0) {
-            print_row_data(data_p[i]);
-          }
-        }
+        print_part_of_data(info_p);
         break;
       }
 
