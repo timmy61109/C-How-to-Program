@@ -750,10 +750,16 @@ int compare(vehicle_management_t source_data_p, vehicle_management_t target_data
 }
 
 void print_part_of_data(file_argc_t *info_p) {
-  printf("%s\n", "data merge file is success");
+  printf("\n%s\n\n", "顯示來源資料");
   for (size_t i = 0; i < info_p->count; i++) {
     if (info_p->source_data[i].number != 0) {
       print_row_data(info_p->source_data[i]);
+    }
+  }
+  printf("\n%s\n\n", "顯示目標資料");
+  for (size_t i = 0; i < info_p->count; i++) {
+    if (info_p->target_data[i].number != 0) {
+      print_row_data(info_p->target_data[i]);
     }
   }
 }
