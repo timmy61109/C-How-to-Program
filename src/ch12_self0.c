@@ -247,7 +247,7 @@ void use_database(vehicle_management_t *data_p) {
 void close_database(vehicle_management_t *data_p) {
   FILE *file_p;
   char database_name_p[50];
-  printf("%s", "Please keyin database name: ");
+  printf("%s", "Please keyin svae data the database name: ");
   scanf("%s", database_name_p);
 
   if ((file_p = fopen(database_name_p, "rb+")) == NULL) {
