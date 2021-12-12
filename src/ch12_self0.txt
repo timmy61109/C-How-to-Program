@@ -308,6 +308,12 @@ target.dat
 119
 119
 119
+4
+6
+2
+1
+sources.csv
+7
 1
 2
 target.dat
@@ -317,5 +323,7 @@ target.dat
 7
 3
 2
-target.dat
 sources.csv
+target.dat
+3
+5
