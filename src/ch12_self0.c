@@ -34,7 +34,7 @@ typedef struct {
   unsigned int count;
   vehicle_management_t source_data[DATABASE];
   vehicle_management_t target_data[DATABASE];
-} file_argc_t;
+} info_argc_t;
 
 unsigned int init_menu();
 
@@ -47,7 +47,7 @@ void close_database(vehicle_management_t *data_p);
 
 // management
 unsigned int management_meun();
-void management(file_argc_t *info_p);
+void management(info_argc_t *info_p);
 void export_csv(vehicle_management_t *data_p);
 void insert(vehicle_management_t *data_p);
 void selete(vehicle_management_t *data_p);
@@ -59,9 +59,9 @@ void example(vehicle_management_t *data_p);
 
 // file merge to database
 unsigned int merge_menu();
-void merge(file_argc_t *info_p);
-void file_merge_data(file_argc_t *info_p);
-void data_merge_file(file_argc_t *info_p);
+void merge(info_argc_t *info_p);
+void file_merge_data(info_argc_t *info_p);
+void data_merge_file(info_argc_t *info_p);
 void source_merge_to_target(vehicle_management_t *source_data_p,
     vehicle_management_t *target_data_p, unsigned int *count_p);
 
@@ -73,13 +73,13 @@ void print_data(vehicle_management_t *data_p, unsigned int *count_p);
 void print_row_data(vehicle_management_t data);
 void write_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *count_p);
 void write_row_data(char *file_name_p, vehicle_management_t data);
-void read_data(file_argc_t *info_p);
+void read_data(info_argc_t *info_p);
 int compare(vehicle_management_t database_data_p, vehicle_management_t file_data_p);
-void print_part_of_data(file_argc_t *info_p);
+void print_part_of_data(info_argc_t *info_p);
 
 
 int main() {
-  file_argc_t info = {
+  info_argc_t info = {
     "test.csv",
     "test.dat",
     DATABASE,
@@ -273,7 +273,7 @@ unsigned int management_meun() {
   return management_menu_choice;
 }
 
-void management(file_argc_t *info_p) {
+void management(info_argc_t *info_p) {
   unsigned int choice = 119;
   while (choice != 7) {
     switch (choice) {
@@ -456,7 +456,7 @@ unsigned int merge_menu() {
   return merge_menu_choice;
 }
 
-void merge(file_argc_t *info_p) {
+void merge(info_argc_t *info_p) {
   unsigned int choice = 119;
 
   while (choice != 3) {
@@ -499,7 +499,7 @@ void merge(file_argc_t *info_p) {
 
 }
 
-void file_merge_data(file_argc_t *info_p) {
+void file_merge_data(info_argc_t *info_p) {
   use_database(info_p->target_data);
 
   printf("%s", "Please keyin sources file name: ");
@@ -512,7 +512,7 @@ void file_merge_data(file_argc_t *info_p) {
 
 }
 
-void data_merge_file(file_argc_t *info_p) {
+void data_merge_file(info_argc_t *info_p) {
   printf("%s", "Please keyin target file name: ");
   scanf("%s", info_p->file_name);
   read_data(info_p);
@@ -668,7 +668,7 @@ void write_row_data(char *file_name_p, vehicle_management_t data) {
   }
 }
 
-void read_data(file_argc_t *info_p) {
+void read_data(info_argc_t *info_p) {
   FILE *file_p;
   unsigned int count = 0;
   char line[7000];
@@ -755,7 +755,7 @@ int compare(vehicle_management_t source_data_p, vehicle_management_t target_data
   return license_plate || !engine_number || name || id || phone_number || address || date || !amount_of_money;
 }
 
-void print_part_of_data(file_argc_t *info_p) {
+void print_part_of_data(info_argc_t *info_p) {
   printf("\n%s\n\n", "顯示來源資料");
   for (size_t i = 0; i < info_p->count; i++) {
     if (info_p->source_data[i].number != 0) {
