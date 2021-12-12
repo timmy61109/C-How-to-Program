@@ -533,8 +533,9 @@ void data_merge_file(file_argc_t *info_p) {
 
 void source_merge_to_target(vehicle_management_t *source_data_p,
     vehicle_management_t *target_data_p, unsigned int *count_p) {
-  unsigned int _compare = 0;
+  unsigned int _compare;
   for (size_t i = 0; i < *count_p; i++) {
+    _compare = 1;
     for (size_t j = 0; j < *count_p; j++) {
       _compare = compare(target_data_p[j], source_data_p[i]);
     }
