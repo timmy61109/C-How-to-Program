@@ -494,7 +494,7 @@ void merge(file_argc_t *info_p) {
         break;
       }
     }
-    choice = management_meun();
+    choice = merge_menu();
   }
 
 }
