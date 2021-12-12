@@ -537,7 +537,7 @@ void source_merge_to_target(vehicle_management_t *source_data_p,
   for (size_t i = 0; i < *count_p; i++) {
     _compare = 1;
     for (size_t j = 0; j < *count_p; j++) {
-      _compare = compare(target_data_p[j], source_data_p[i]);
+      _compare &= compare(target_data_p[j], source_data_p[i]);
     }
     if ((target_data_p[i].number == 0) && _compare) {
       target_data_p[i] = source_data_p[i];
