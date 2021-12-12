@@ -510,7 +510,6 @@ void file_merge_data(file_argc_t *info_p) {
   source_merge_to_target(info_p->source_data, info_p->target_data, &info_p->count);
   print_part_of_data(info_p);
 
-  write_data(info_p->file_name, info_p->target_data, &info_p->count);
 }
 
 void data_merge_file(file_argc_t *info_p) {
