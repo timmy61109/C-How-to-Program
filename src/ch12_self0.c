@@ -721,6 +721,11 @@ void read_data(file_argc_t *info_p) {
 }
 
 int compare(vehicle_management_t source_data_p, vehicle_management_t target_data_p) {
+  /*比對數字後回傳數字結果
+
+  一樣 return 0
+  不一樣 return 1
+  */
   int license_plate = strcmp(
     source_data_p.license_plate,
     target_data_p.license_plate
