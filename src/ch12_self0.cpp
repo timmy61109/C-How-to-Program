@@ -1,6 +1,6 @@
-/*
-ch12_self0.c
-vehicle management
+/* ch12_self0.cpp
+
+vehicle management 汽車管理軟體
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -139,6 +139,7 @@ int main() {
 }
 
 unsigned int init_menu() {
+  // 初始化功能選擇輸入
   printf("%s", "\n > ");
   unsigned int init_menu_choice;
   scanf("%u", &init_menu_choice);
@@ -146,6 +147,7 @@ unsigned int init_menu() {
 }
 
 unsigned int database_menu() {
+  // 資料庫功能選擇輸入
   printf("%s", "\n (database) > ");
   unsigned int database_menu_choice;
   scanf("%u", &database_menu_choice);
@@ -153,6 +155,7 @@ unsigned int database_menu() {
 }
 
 void database(vehicle_management_t *data_p) {
+  // 資料庫主程式
   unsigned int choice = 119;
 
   while (choice != 4) {
@@ -198,6 +201,7 @@ void database(vehicle_management_t *data_p) {
 }
 
 void creat_database() {
+  // 建立資料庫
   FILE *file_p;
   char database_name[50];
   vehicle_management_t database = {0, "null", 0, "null", "null", "null", "null", "null", 0};
@@ -219,6 +223,7 @@ void creat_database() {
 }
 
 void use_database(vehicle_management_t *data_p) {
+  // 選擇使用的資料庫
   FILE *file_p;
   unsigned int count = 0;
   char database_name[50];
@@ -244,6 +249,7 @@ void use_database(vehicle_management_t *data_p) {
 }
 
 void close_database(vehicle_management_t *data_p) {
+  // 關閉資料庫並把資料清空
   FILE *file_p;
   char database_name_p[50];
   printf("%s", "Please keyin svae data the database name: ");
@@ -267,6 +273,7 @@ void close_database(vehicle_management_t *data_p) {
 }
 
 unsigned int management_meun() {
+  // 管理功能選擇輸入
   printf("%s", "\n (management) > ");
   unsigned int management_menu_choice;
   scanf("%u", &management_menu_choice);
@@ -274,6 +281,7 @@ unsigned int management_meun() {
 }
 
 void management(info_argc_t *info_p) {
+  // 管理主程式
   unsigned int choice = 119;
   while (choice != 7) {
     switch (choice) {
@@ -338,6 +346,7 @@ void management(info_argc_t *info_p) {
 }
 
 void export_csv(vehicle_management_t *data_p) {
+  // 將記憶體的資料輸出csv格式
   unsigned int count = DATABASE;
   char file_name[50];
   printf("%s", "Please keyin file name: ");
@@ -347,6 +356,7 @@ void export_csv(vehicle_management_t *data_p) {
 }
 
 void insert(vehicle_management_t *data_p) {
+  // 插入資料，輸入編號選擇插入位置
   unsigned int account = 0;
   unsigned int count = DATABASE;
   if (sizeof(data_p) == 0) {
@@ -368,6 +378,7 @@ void insert(vehicle_management_t *data_p) {
 }
 
 void selete(vehicle_management_t *data_p) {
+  // 搜尋資料，以姓名篩選指定的資料
   unsigned int count = DATABASE;
   printf("%s%u%s", "Enter name search (1 - ", count, ")\n");
 
@@ -376,6 +387,7 @@ void selete(vehicle_management_t *data_p) {
 }
 
 void drop(vehicle_management_t *data_p) {
+  // 刪除資料，輸入該數字的編號
   unsigned int account = 0;
   vehicle_management_t temp = {0, "null", 0, "null", "null", "null", "null", "null", 0};
 
@@ -393,6 +405,7 @@ void drop(vehicle_management_t *data_p) {
 }
 
 void update(vehicle_management_t *data_p) {
+  // 更新資料，輸入數字選擇更新位置
   unsigned int count = DATABASE;
   unsigned int account = 0;
 
@@ -411,6 +424,7 @@ void update(vehicle_management_t *data_p) {
 }
 
 void example(vehicle_management_t *data_p) {
+  // 產生示範資料，該資料會自動儲存在記憶體
   vehicle_management_t create[SIZE] = {
     {
       1,
@@ -450,6 +464,7 @@ void example(vehicle_management_t *data_p) {
 }
 
 unsigned int merge_menu() {
+  // 合併功能選擇輸入
   printf("%s", "\n (merge) > ");
   unsigned int merge_menu_choice;
   scanf("%u", &merge_menu_choice);
@@ -457,6 +472,7 @@ unsigned int merge_menu() {
 }
 
 void merge(info_argc_t *info_p) {
+  // 合併主程式
   unsigned int choice = 119;
 
   while (choice != 3) {
@@ -500,6 +516,8 @@ void merge(info_argc_t *info_p) {
 }
 
 void file_merge_data(info_argc_t *info_p) {
+  // 檔案合併到記憶體
+  // 操作時會重新讀取選擇資料庫並覆蓋原先記憶體資料
   use_database(info_p->target_data);
 
   printf("%s", "Please keyin sources file name: ");
@@ -513,6 +531,8 @@ void file_merge_data(info_argc_t *info_p) {
 }
 
 void data_merge_file(info_argc_t *info_p) {
+  // 記憶體合併到檔案
+  // 操作時會重新讀取選擇資料庫並覆蓋原先記憶體資料
   printf("%s", "Please keyin target file name: ");
   scanf("%s", info_p->file_name);
   read_data(info_p);
@@ -532,6 +552,7 @@ void data_merge_file(info_argc_t *info_p) {
 
 void source_merge_to_target(vehicle_management_t *source_data_p,
     vehicle_management_t *target_data_p, unsigned int *count_p) {
+  // 將兩種不同陣列合併，分別是來源合併目標，通過將來源合併到目標
   unsigned int _compare;
   for (size_t i = 0; i < *count_p; i++) {
     _compare = 1;
@@ -554,6 +575,7 @@ void source_merge_to_target(vehicle_management_t *source_data_p,
 }
 
 void keyin(vehicle_management_t *data_p, unsigned int *count_p) {
+  // 連續資料輸入
 
   for (size_t i = 0; i < *count_p; i++) {
     keyin_row((data_p + i));
@@ -562,6 +584,7 @@ void keyin(vehicle_management_t *data_p, unsigned int *count_p) {
 }
 
 void keyin_row(vehicle_management_t *data_row_p) {
+  // 單筆資料輸入
   printf("%s", "\n輸入車牌：");
   scanf(" %[^\n]", data_row_p->license_plate);
 
@@ -589,6 +612,8 @@ void keyin_row(vehicle_management_t *data_row_p) {
 }
 
 void search(vehicle_management_t *data_p) {
+  // 篩選指定資料，此為使用姓名欄位做篩選
+  // 篩選後會清除其他非篩選資料，如果沒有找到記憶體的資料會被空值清空
   vehicle_management_t null = {0, "null", 0, "null", "null", "null", "null", "null", 0};
   char search_name[NAME];
   unsigned int count = 0;
@@ -613,6 +638,7 @@ void search(vehicle_management_t *data_p) {
 }
 
 void print_data(vehicle_management_t *data_p, unsigned int *count_p) {
+  // 顯示記憶體中陣列資料
   for (size_t i = 0; i < *count_p; i++) {
     printf("%p\n", &*(data_p + i));
     print_row_data(*(data_p + i));
@@ -620,6 +646,7 @@ void print_data(vehicle_management_t *data_p, unsigned int *count_p) {
 }
 
 void print_row_data(vehicle_management_t data) {
+  // 顯示單筆資料
   printf("%-10u%-22s%-15u%-20s%-12s%-17s%-64s%-22s%-20u\n",
     data.number,
     data.license_plate,
@@ -634,6 +661,7 @@ void print_row_data(vehicle_management_t data) {
 }
 
 void write_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *count_p) {
+  // 建立資料夾並寫入資料
   FILE *file_p;
   puts("File is write...");
   if ((file_p = fopen(file_name_p, "w")) == NULL) {
@@ -648,6 +676,8 @@ void write_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *c
 }
 
 void write_row_data(char *file_name_p, vehicle_management_t data) {
+  // 透過追加方式寫入資料
+
   FILE *file_p;
 
   if ((file_p = fopen(file_name_p, "a")) == NULL) {
@@ -669,6 +699,7 @@ void write_row_data(char *file_name_p, vehicle_management_t data) {
 }
 
 void read_data(info_argc_t *info_p) {
+  // 讀取資料
   FILE *file_p;
   unsigned int count = 0;
   char line[7000];
@@ -756,6 +787,8 @@ int compare(vehicle_management_t source_data_p, vehicle_management_t target_data
 }
 
 void print_part_of_data(info_argc_t *info_p) {
+  // 顯示記憶體有數值的資料，不會將空值也顯示出來
+  // 會區分結構中兩個不同的資料，包括來源資料與目標資料
   printf("\n%s\n\n", "顯示來源資料");
   for (size_t i = 0; i < info_p->count; i++) {
     if (info_p->source_data[i].number != 0) {
