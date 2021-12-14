@@ -4,6 +4,7 @@
 #define SIZE 10
 
 void bubble(int work[], size_t size, int (*compare)(int a, int b));
+void swap(int *element1Ptr, int *element2Ptr); // prototype
 int ascending(int a, int b);
 int descending(int a, int b);
 
@@ -41,7 +42,6 @@ int main(void) {
 
 // sart an array of integers using bubble sort algorithm
 void bubble(int * const work[], size_t size, int (*compare)(int a, int b)) {
-  void swap(int *element1Ptr, int *element2Ptr); // prototype
 
   // Loop to control passes
   for (unsigned int pass = 1; pass < size; ++pass) {
