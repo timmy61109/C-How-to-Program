@@ -133,7 +133,7 @@ void BankUserClient::creat_database() {
   fclose(file_p);
 }
 
-void BankUserClient::use_database(user_data_t *data_p) {
+void BankUserClient::use_database() {
   // 選擇使用的資料庫
   FILE *file_p;
   unsigned int count = 0;
@@ -159,7 +159,7 @@ void BankUserClient::use_database(user_data_t *data_p) {
   printf("%s%s%s\n", "use ", database_name, " database");
 }
 
-void BankUserClient::close_database(user_data_t *data_p) {
+void BankUserClient::close_database() {
   // 關閉資料庫並把資料清空
   FILE *file_p;
   char database_name_p[50];
@@ -269,7 +269,7 @@ void BankUserClient::update(user_data_t *data_p) {
   }
 }
 
-void BankUserClient::example(user_data_t *data_p) {
+void BankUserClient::example() {
   // 產生示範資料，該資料會自動儲存在記憶體
   user_data_t create[SIZE] = {
     {
@@ -308,7 +308,7 @@ unsigned int merge_menu() {
   return merge_menu_choice;
 }
 
-void BankUserClient::merge(info_argc_t *info_p) {
+void BankUserClient::merge(info_t *info_p) {
   // 合併主程式
   unsigned int choice = 119;
 
@@ -352,7 +352,7 @@ void BankUserClient::merge(info_argc_t *info_p) {
 
 }
 
-void BankUserClient::file_merge_data(info_argc_t *info_p) {
+void BankUserClient::file_merge_data() {
   // 檔案合併到記憶體
   // 操作時會重新讀取選擇資料庫並覆蓋原先記憶體資料
   use_database(info_p->target_data);
