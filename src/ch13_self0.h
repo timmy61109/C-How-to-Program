@@ -1,31 +1,32 @@
 #define ID 12
 #define DATABASE 500
 
+typedef struct {
+  unsigned int number;
+  char name[50];
+  char id[ID];
+  char account[256];
+  char password[256];
+  double balance;
+
+} user_data_t;
+
+typedef struct {
+  char file_name[50];
+  char database_name[50];
+  unsigned int count;
+  user_data_t source_data[DATABASE];
+  user_data_t target_data[DATABASE];
+
+} info_t;
 
 class BankUserClient {         // c 類別宣告
   private:
     // 私有資料成員
-
-    typedef struct {
-      unsigned int number;
-      char name[50];
-      char id[ID];
-      char account[256];
-      char password[256];
-      double balance;
-
-    } user_data_t;
-
-    typedef struct {
-      char file_name[50];
-      char database_name[50];
-      unsigned int count;
-      user_data_t source_data[DATABASE];
-      user_data_t target_data[DATABASE];
-
-    } info_t;
+    info_t info;
 
   public:
+
     // 公用函數成員
     BankUserClient(info_t *info);  // c 的 constructor 宣告
     BankUserClient(const BankUserClient& str);  // Copy constructor宣告
@@ -65,7 +66,8 @@ class BankUserClient {         // c 類別宣告
     void merge();
     void file_merge_data();
     void data_merge_file();
-    void source_merge_to_target();
+    void source_merge_to_target(user_data_t *source_data_p,
+      user_data_t *target_data_p, unsigned int *count_p);
 
     // Share function
     void keyin(info_t *info_p);
@@ -76,7 +78,7 @@ class BankUserClient {         // c 類別宣告
     void write_data();
     void write_row_data();
     void read_data();
-    int compare();
+    int compare(user_data_t source_data_p, user_data_t target_data_p);
     void print_part_of_data();
 
 };
