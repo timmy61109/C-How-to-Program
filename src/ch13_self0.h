@@ -40,18 +40,13 @@ class BankUserClient {         // c 類別宣告
     void withdraw();
     void exit();
 
-    unsigned int init_menu();
-
     // database
-    unsigned int database_menu();
     void database();
     void creat_database();
     void use_database();
     void close_database();
 
     // management
-    unsigned int management_meun();
-    void management();
     void export_csv();
     void insert();
     void selete();
@@ -62,14 +57,12 @@ class BankUserClient {         // c 類別宣告
     void example();
 
     // file merge to database
-    unsigned int merge_menu();
-    void merge();
     void file_merge_data();
     void data_merge_file();
-    void source_merge_to_target(user_data_t *source_data_p,
-      user_data_t *target_data_p, unsigned int *count_p);
 
     // Share function
+    void source_merge_to_target(user_data_t *source_data_p,
+      user_data_t *target_data_p, unsigned int *count_p);
     void keyin(info_t *info_p);
     void keyin_row(user_data_t *data_row_p);
     void search();
