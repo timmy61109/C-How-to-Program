@@ -7,8 +7,8 @@ class Salary {
     static int pay;    //靜態資料成員
     int  day;
   public:
-    Salary( ) { };      //Default constructor
-    ~Salary( ) { };      //Destructor
+    Salary() {};      //Default constructor
+    ~Salary() {};      //Destructor
     static void getpay(int p) {pay=p;} //靜態成員函數定義
     void getdata();              //輸入函數宣告
     void showdata();             //顯示資料函數宣告
