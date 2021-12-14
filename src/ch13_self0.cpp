@@ -19,19 +19,16 @@ int main() {
 
       case 2: {
         puts("management");
-        BankUserClient::sign_in(&info);
+        BankUserClient::sign_in();
         break;
       }
 
       case 3: {
-        puts("merge");
-        merge(&info);
         break;
       }
 
       case 4: {
-        puts("example");
-        example(info.target_data);
+        BankUserClient::example();
         break;
       }
 
