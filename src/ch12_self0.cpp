@@ -669,7 +669,9 @@ void write_data(char *file_name_p, vehicle_management_t *data_p, unsigned int *c
   } else {
     fclose(file_p);
     for (size_t i = 0; i < *count_p; i++) {
-      write_row_data(file_name_p, *(data_p + i));
+      if ((data_p + i)->number != 0) {
+        write_row_data(file_name_p, *(data_p + i));
+      }
     }
     printf("%p row: %u\n", &*(data_p + (*count_p - 1)), *count_p);
   }
