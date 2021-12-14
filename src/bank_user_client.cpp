@@ -175,7 +175,7 @@ void BankUserClient::close_database(user_data_t *data_p) {
     for (size_t i = 0; i < DATABASE; i++) {
       fseek(file_p, i * sizeof(user_data_t), SEEK_SET);
       fwrite(&data_p[i], sizeof(user_data_t), 1, file_p);
-      user_data_t null = {0, "null", 0, "null", "null", "null", "null", "null", 0};
+      user_data_t null = {0, "null", "null", "null", "null", 0};
       data_p[i] = null;
     }
   }
@@ -235,7 +235,7 @@ void BankUserClient::selete(user_data_t *data_p) {
 void BankUserClient::drop(user_data_t *data_p) {
   // 刪除資料，輸入該數字的編號
   unsigned int account = 0;
-  user_data_t temp = {0, "null", 0, "null", "null", "null", "null", "null", 0};
+  user_data_t temp = {0, "null", "null", "null", "null", 0};
 
   printf("%s%u%s\n", "Enter account to delete (1 - ", DATABASE, ")");
   printf("%s", "\n (delete) >>> ");
@@ -451,7 +451,7 @@ void BankUserClient::keyin_row(user_data_t *data_row_p) {
 void BankUserClient::search(user_data_t *data_p) {
   // 篩選指定資料，此為使用姓名欄位做篩選
   // 篩選後會清除其他非篩選資料，如果沒有找到記憶體的資料會被空值清空
-  user_data_t null = {0, "null", 0, "null", "null", "null", "null", "null", 0};
+  user_data_t null = {0, "null", "null", "null", "null", 0};
   char search_name[NAME];
   unsigned int count = 0;
   scanf(" %[^\n]", search_name);
