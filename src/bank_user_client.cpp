@@ -17,7 +17,7 @@
 #define MONEY 22
 
 
-BankUserClient::BankUserClient(char *s, char *c) {
+BankUserClient::BankUserClient(info_t *info) {
 }
 
 BankUserClient::BankUserClient(const BankUserClient& str) {
@@ -65,7 +65,7 @@ unsigned int BankUserClient::database_menu() {
   return database_menu_choice;
 }
 
-void BankUserClient::database(user_data_t *data_p) {
+void BankUserClient::database() {
   // 資料庫主程式
   unsigned int choice = 119;
 
@@ -358,12 +358,12 @@ void BankUserClient::file_merge_data() {
   use_database(info.target_data);
 
   printf("%s", "Please keyin sources file name: ");
-  scanf("%s", info_p->file_name);
-  read_data(info_p);
+  scanf("%s", info.file_name);
+  read_data(info);
 
-  print_part_of_data(info_p);
-  source_merge_to_target(info_p->source_data, info_p->target_data, &info_p->count);
-  print_part_of_data(info_p);
+  print_part_of_data(info);
+  source_merge_to_target(info.source_data, info.target_data, &info.count);
+  print_part_of_data(info);
 
 }
 
@@ -371,20 +371,20 @@ void BankUserClient::data_merge_file() {
   // 記憶體合併到檔案
   // 操作時會重新讀取選擇資料庫並覆蓋原先記憶體資料
   printf("%s", "Please keyin target file name: ");
-  scanf("%s", info_p->file_name);
-  read_data(info_p);
+  scanf("%s", info.file_name);
+  read_data(info);
 
-  for (size_t i = 0; i < info_p->count; i++) {
-    info_p->target_data[i] = info_p->source_data[i];
+  for (size_t i = 0; i < info.count; i++) {
+    info.target_data[i] = info.source_data[i];
   }
 
-  use_database(info_p->source_data);
+  use_database(info.source_data);
 
-  print_part_of_data(info_p);
-  source_merge_to_target(info_p->source_data, info_p->target_data, &info_p->count);
-  print_part_of_data(info_p);
+  print_part_of_data(info);
+  source_merge_to_target(info.source_data, info.target_data, &info.count);
+  print_part_of_data(info);
 
-  write_data(info_p->file_name, info_p->target_data, &info_p->count);
+  write_data(info.file_name, info.target_data, &info.count);
 }
 
 void BankUserClient::source_merge_to_target(user_data_t *source_data_p,
@@ -414,8 +414,8 @@ void BankUserClient::source_merge_to_target(user_data_t *source_data_p,
 void BankUserClient::keyin(info_t *info_p) {
   // 連續資料輸入
 
-  for (size_t i = 0; i < *count_p; i++) {
-    keyin_row((data_p + i));
+  for (size_t i = 0; i < info_p->count; i++) {
+    keyin_row((info_p->target_data + i));
 
   }
 }
@@ -542,7 +542,7 @@ void BankUserClient::read_data() {
   char line[7000];
   char *cut;
 
-  if ((file_p = fopen(info_p->file_name, "r")) == NULL) {
+  if ((file_p = fopen(info.file_name, "r")) == NULL) {
     puts("File could not be opened");
 
   } else {
@@ -550,41 +550,41 @@ void BankUserClient::read_data() {
 
     while (fgets(line, DATABASE, file_p) != NULL) {
       cut = strtok(line, ",");
-      info_p->source_data[count].number = atoi(cut);
+      info.source_data[count].number = atoi(cut);
 
       cut = strtok(NULL, "\",");
-      strcpy(info_p->source_data[count].license_plate, cut);
+      strcpy(info.source_data[count].license_plate, cut);
 
       cut = strtok(NULL, ",\"");
-      info_p->source_data[count].engine_number = atoi(cut);
+      info.source_data[count].engine_number = atoi(cut);
 
       cut = strtok(NULL, "\",\"");
-      strcpy(info_p->source_data[count].name, cut);
+      strcpy(info.source_data[count].name, cut);
 
       cut = strtok(NULL, "\",\"");
-      strcpy(info_p->source_data[count].id, cut);
+      strcpy(info.source_data[count].id, cut);
 
       cut = strtok(NULL, "\",\"");
-      strcpy(info_p->source_data[count].phone_number, cut);
+      strcpy(info.source_data[count].phone_number, cut);
 
       cut = strtok(NULL, "\",\"");
-      strcpy(info_p->source_data[count].address, cut);
+      strcpy(info.source_data[count].address, cut);
 
       cut = strtok(NULL, "\",");
-      strcpy(info_p->source_data[count].date, cut);
+      strcpy(info.source_data[count].date, cut);
 
       cut = strtok(NULL, ",\"");
-      info_p->source_data[count].amount_of_money = atoi(cut);
+      info.source_data[count].amount_of_money = atoi(cut);
 
-      if (info_p->source_data[count].number != 0) {
-        print_row_data(info_p->source_data[count]);
+      if (info.source_data[count].number != 0) {
+        print_row_data(info.source_data[count]);
       }
 
       if (count < DATABASE) {
         count++;
       }
     }
-    info_p->count = count;
+    info.count = count;
   }
 }
 
@@ -594,11 +594,6 @@ int BankUserClient::compare(user_data_t source_data_p, user_data_t target_data_p
   一樣 return 0
   不一樣 return 1
   */
-  int license_plate = strcmp(
-    source_data_p.license_plate,
-    target_data_p.license_plate
-  );
-  int engine_number = source_data_p.engine_number == target_data_p.engine_number;
   int name = strcmp(
     source_data_p.name,
     target_data_p.name
@@ -607,35 +602,31 @@ int BankUserClient::compare(user_data_t source_data_p, user_data_t target_data_p
     source_data_p.id,
     target_data_p.id
   );
-  int phone_number = strcmp(
-    source_data_p.phone_number,
-    target_data_p.phone_number
+  int account = strcmp(
+    source_data_p.account,
+    target_data_p.account
   );
-  int address = strcmp(
-    source_data_p.address,
-    target_data_p.address
+  int password = strcmp(
+    source_data_p.password,
+    target_data_p.password
   );
-  int date = strcmp(
-    source_data_p.date,
-    target_data_p.date
-  );
-  int amount_of_money = source_data_p.amount_of_money == target_data_p.amount_of_money;
-  return license_plate || !engine_number || name || id || phone_number || address || date || !amount_of_money;
+  int balance = source_data_p.balance == target_data_p.balance;
+  return name || id || account || password || !balance;
 }
 
 void BankUserClient::print_part_of_data() {
   // 顯示記憶體有數值的資料，不會將空值也顯示出來
   // 會區分結構中兩個不同的資料，包括來源資料與目標資料
   printf("\n%s\n\n", "顯示來源資料");
-  for (size_t i = 0; i < info_p->count; i++) {
-    if (info_p->source_data[i].number != 0) {
-      print_row_data(info_p->source_data[i]);
+  for (size_t i = 0; i < info.count; i++) {
+    if (info.source_data[i].number != 0) {
+      print_row_data(info.source_data[i]);
     }
   }
   printf("\n%s\n\n", "顯示目標資料");
-  for (size_t i = 0; i < info_p->count; i++) {
-    if (info_p->target_data[i].number != 0) {
-      print_row_data(info_p->target_data[i]);
+  for (size_t i = 0; i < info.count; i++) {
+    if (info.target_data[i].number != 0) {
+      print_row_data(info.target_data[i]);
     }
   }
 }
