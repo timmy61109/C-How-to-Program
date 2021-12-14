@@ -5,20 +5,21 @@
 
 
 int main() {
-  user_data_t info = {
-  };
   unsigned int choice = 119;
+
+  puts("歡迎來到金門大學銀行 電子分行");
+
   while (choice != 5) {
     switch (choice) {
       case 1: {
         puts("database");
-        BankUserClient::(info.target_data);
+        BankUserClient::sign_up();
         break;
       }
 
       case 2: {
         puts("management");
-        management(&info);
+        BankUserClient::sign_in(&info);
         break;
       }
 
@@ -57,6 +58,6 @@ int main() {
         break;
       }
     }
-  choice = init_menu();
+  choice = BankUserClient::init_menu();
   }
 }
