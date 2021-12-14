@@ -361,7 +361,7 @@ void BankUserClient::example(user_data_t *data_p) {
     }
   };
   for (size_t i = 0; i < SIZE; i++) {
-    data_p[i] = create[i];
+    info.target_data[i] = create[i];
   }
 }
 
