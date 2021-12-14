@@ -115,7 +115,7 @@ void BankUserClient::creat_database() {
   // 建立資料庫
   FILE *file_p;
   char database_name[50];
-  user_data_t database = {0, "null", 0, "null", "null", "null", "null", "null", 0};
+  user_data_t database = {0, "null", "null", "null", "null", 0};
 
   printf("%s", "Please keyin database name: ");
   scanf("%s", database_name);
