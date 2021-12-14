@@ -76,12 +76,12 @@ void BankUserClient::database(user_data_t *data_p) {
         break;
 
       case 2: {
-        use_database(data_p);
+        use_database();
         break;
       }
 
       case 3: {
-        close_database(data_p);
+        close_database();
         break;
       }
 
