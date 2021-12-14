@@ -355,7 +355,7 @@ void BankUserClient::merge(info_t *info_p) {
 void BankUserClient::file_merge_data() {
   // 檔案合併到記憶體
   // 操作時會重新讀取選擇資料庫並覆蓋原先記憶體資料
-  use_database(info_p->target_data);
+  use_database(info.target_data);
 
   printf("%s", "Please keyin sources file name: ");
   scanf("%s", info_p->file_name);
@@ -367,7 +367,7 @@ void BankUserClient::file_merge_data() {
 
 }
 
-void BankUserClient::data_merge_file(info_argc_t *info_p) {
+void BankUserClient::data_merge_file() {
   // 記憶體合併到檔案
   // 操作時會重新讀取選擇資料庫並覆蓋原先記憶體資料
   printf("%s", "Please keyin target file name: ");
@@ -411,7 +411,7 @@ void BankUserClient::source_merge_to_target(user_data_t *source_data_p,
 
 }
 
-void BankUserClient::keyin(user_data_t *data_p, unsigned int *count_p) {
+void BankUserClient::keyin(info_t *info_p) {
   // 連續資料輸入
 
   for (size_t i = 0; i < *count_p; i++) {
@@ -535,7 +535,7 @@ void BankUserClient::write_row_data(char *file_name_p, user_data_t data) {
   }
 }
 
-void BankUserClient::read_data(info_argc_t *info_p) {
+void BankUserClient::read_data() {
   // 讀取資料
   FILE *file_p;
   unsigned int count = 0;
@@ -588,7 +588,7 @@ void BankUserClient::read_data(info_argc_t *info_p) {
   }
 }
 
-int compare(user_data_t source_data_p, user_data_t target_data_p) {
+int BankUserClient::compare(user_data_t source_data_p, user_data_t target_data_p) {
   /*比對數字後回傳數字結果
 
   一樣 return 0
@@ -623,7 +623,7 @@ int compare(user_data_t source_data_p, user_data_t target_data_p) {
   return license_plate || !engine_number || name || id || phone_number || address || date || !amount_of_money;
 }
 
-void BankUserClient::print_part_of_data(info_argc_t *info_p) {
+void BankUserClient::print_part_of_data() {
   // 顯示記憶體有數值的資料，不會將空值也顯示出來
   // 會區分結構中兩個不同的資料，包括來源資料與目標資料
   printf("\n%s\n\n", "顯示來源資料");
