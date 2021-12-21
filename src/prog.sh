@@ -1,2 +1,2 @@
-g++ prog*.cpp
+g++ -Wall prog*.cpp
 ./a.out
