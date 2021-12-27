@@ -14,4 +14,5 @@ C How to Program, Global Edition, 8/E
 
 範例
 
-- [CPP Road](example/CPP Road/)
+- [CPP Road](example/CPP-Road/)
+- [《C++教學手冊 第三版》](example/C++教學手冊-第三版/)
