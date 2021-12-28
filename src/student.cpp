@@ -1,14 +1,14 @@
 #include <iostream>
 #include <string.h>
-#ifndef SIZE
+#include <stdlib.h>
+#include <stdio.h>
 #define SIZE 50
-#endif
 
 // 類別宣告
 class Student {
   private:
-    char name[SIZE];
-    char school_num[SIZE];
+    char *name_n;
+    char *school_num_n;
     int age;
     static int total_student;  // 記錄學生總數
   public:
@@ -16,7 +16,8 @@ class Student {
     Student() {}  // default constructor
     ~Student() {
       // Destructor
-      delete name, school_num;
+      delete name_n;
+      delete school_num_n;
     }
 
     static int get_num() {
@@ -26,11 +27,14 @@ class Student {
     void show();
 };
 
-Student::Student(char *name_p, char *school_num_p, int number_p) {
-  // Constructor
+
+// Constructor
+Student::Student(char name_p[50], char school_num_p[50], int number_p) {
+  name_n = new char[SIZE];
+  school_num_n = new char[SIZE];
   for (size_t i = 0; i < SIZE; i++) {
-    name_p[i] = name[i];
-    school_num_p[i] = school_num[i];
+    name_n[i] = name_p[i];
+    school_num_n[i] = school_num_p[i];
   }
   age = number_p;
   total_student += 1;
@@ -38,7 +42,7 @@ Student::Student(char *name_p, char *school_num_p, int number_p) {
 
 void Student::show() {
   // 資料顯示
-  std::cout << "\n\n姓名=" << name << "\n學號=" << school_num << "\n年齡=" << age;
+  std::cout << "\n\n姓名=" << name_n << "\n學號=" << school_num_n << "\n年齡=" << age;
 }
 
 void Student::selection_sort(/* arguments */) {
@@ -55,11 +59,19 @@ int Student::total_student = 0;
 // 主程式
 int main() {
   // 物件定義，並定義初值
+  char name_1[50] = "Losa";
+  char name_2[50] = "John";
+  char name_3[50] = "Jane";
+  char name_4[50] = "Mary";
+  char school_num_1[50] = "1234224";
+  char school_num_2[50] = "1234424";
+  char school_num_3[50] = "1216224";
+  char school_num_4[50] = "3224224";
   Student student[4] = {
-    Student("Losa", "1234224", 11),
-    Student("John", "1234424", 14),
-    Student("Jane", "1216224", 13),
-    Student("Mary", "3224224", 12)
+    Student(name_1, school_num_1, 11),
+    Student(name_2, school_num_2, 14),
+    Student(name_3, school_num_3, 13),
+    Student(name_4, school_num_4, 12)
   };
 
   // 顯示
