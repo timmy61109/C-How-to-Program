@@ -3,54 +3,95 @@ const int LEN  = 10;
 const int LEN1 = 7;
 
 
-//共同科目
+// 共同科目
 class Common {
   protected:
 	int Chinese;
 	int English;
 	int Math;
   public:
-    //Constructor
+    // Constructor
     Common(int chi, int eng, int ma);
     void  showdata();
 };
 
-class Electronics        //電子科目
-{
- protected:
-	int Computer;
-	int Circuit;
- public:                     //Constructor
-	Electronics(int com,int cir);
-	void showdata();
+
+// 電子科目
+class Electronics {
+  protected:
+    int Computer;
+    int Circuit;
+  public:
+    // Constructor
+    Electronics(int com, int cir);
+    void showdata();
 };
 
 
-class Account          //會計科目
-{
- protected:
-	int Economics;
-	int Accounting;
- public:                                 //Constructor
-	Account(int eco,int acc);
-	void showdata();
+// 會計科目
+class Account {
+  protected:
+	  int Economics;
+    int Accounting;
+  public:
+    // Constructor
+    Account(int eco,int acc);
+    void showdata();
 };
 
-class Student_EE:public Common, public Electronics //電子科學生
- {
+
+// 機械科目
+class Mechanics {
+  protected:
+	  int Material;
+    int Control;
+  public:
+    // Constructor
+    Mechanics(int mat, int con);
+    void showdata();
+};
+
+
+// 電子科學生
+class Student_EE:public Common, public Electronics {
   private:
-           char name[LEN];
-	 char stu_num[LEN1];
-  public:                                        //Constructor
-        Student_EE(char *n,char *s, int chi,int eng,int math,int com, int cir);
-        void showdata();
- };
- class Student_AC:public Common, public Account //會計科學生
- {
+    char name[LEN];
+    char stu_num[LEN1];
+  public:                                        // Constructor
+    Student_EE(char *n,char *s, int chi,int eng,int math,int com, int cir);
+    void showdata();
+};
+
+
+// 會計科學生
+class Student_AC:public Common, public Account {
+private:
+     char name[LEN];
+     char stu_num[LEN1];
+public:                                        // Constructor
+   Student_AC(char *n,char *s, int chi,int eng,int math, int eco, int acc);
+   void showdata();
+};
+
+
+//  機械科學生類別
+class Student_ME:public Common, public Mechanics {
   private:
-       char name[LEN];
-       char stu_num[LEN1];
-  public:                                        //Constructor
-     Student_AC(char *n,char *s, int chi,int eng,int math, int eco, int acc);
-     void showdata();
- };
+    char name[LEN];
+    char stu_num[LEN1];
+  public:
+    // Constructor
+    Student_ME(char *n, char *s, int chi, int eng, int math, int mat, int con);
+    void showdata();
+};
+
+
+class Colloge::public Student_ME, public Student_EE, public Student_AC {
+  private:
+    char colloge_name[LEN];
+    char e_mail_add[LEN];
+
+
+  public:
+    void showdata();
+}
