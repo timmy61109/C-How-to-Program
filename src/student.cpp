@@ -8,7 +8,7 @@
 class Student {
   private:
     char *name_n;
-    char *school_num_n;
+    char *school_number_n;
     int age;
     static int total_student;  // 記錄學生總數
   public:
@@ -17,13 +17,13 @@ class Student {
     ~Student() {
       // Destructor
       delete name_n;
-      delete school_num_n;
+      delete school_number_n;
     }
 
     static int get_num() {
       return total_student;
     }
-    void selection_sort();
+    void selection_sort(Student *student_p);
     void show();
 };
 
@@ -31,10 +31,10 @@ class Student {
 // Constructor
 Student::Student(char name_p[50], char school_num_p[50], int number_p) {
   name_n = new char[SIZE];
-  school_num_n = new char[SIZE];
+  school_number_n = new char[SIZE];
   for (size_t i = 0; i < SIZE; i++) {
     name_n[i] = name_p[i];
-    school_num_n[i] = school_num_p[i];
+    school_number_n[i] = school_num_p[i];
   }
   age = number_p;
   total_student += 1;
@@ -42,14 +42,20 @@ Student::Student(char name_p[50], char school_num_p[50], int number_p) {
 
 void Student::show() {
   // 資料顯示
-  std::cout << "\n\n姓名=" << name_n << "\n學號=" << school_num_n << "\n年齡=" << age;
+  std::cout << "\n\n姓名=" << name_n << "\n學號=" << school_number_n << "\n年齡=" << age;
 }
 
-void Student::selection_sort(/* arguments */) {
-  Student student_temp[4];
+void Student::selection_sort(Student *student_p) {
+  Student student_temp;
 
   for (size_t i = 0; i < (size_t) Student::get_num(); i++) {
-
+    for (size_t j = i + 1; j < (size_t) Student::get_num(); j++) {
+      if ((int*) student_p[i].school_number_n > (int*) student_p[j].school_number_n) {
+        student_temp = student_p[i];
+        student_p[i] = student_p[j];
+        student_p[j] = student_temp;
+      }
+    }
   }
 
 }
@@ -75,6 +81,12 @@ int main() {
   };
 
   // 顯示
+  for (int i = 0; i< Student::get_num(); i++) {
+    student[i].show();
+    std::cout << "\n";
+  }
+
+  Student::selection_sort(student);
   for (int i = 0; i< Student::get_num(); i++) {
     student[i].show();
     std::cout << "\n";
