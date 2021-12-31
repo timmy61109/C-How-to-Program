@@ -3,7 +3,6 @@
 
 
 int main() {
-  // char *n, char *s, int chi, int eng, int math, int com, int cir
   student_t student_1 = {
     98,
     89,
