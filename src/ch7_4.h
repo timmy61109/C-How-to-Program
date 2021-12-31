@@ -2,6 +2,21 @@
 const int LEN  = 10;
 const int LEN1 = 7;
 
+typedef struct {
+  int chinese;
+  int english;
+  int math;
+  int computer;
+  int circuit;
+  int economics;
+  int accounting;
+  int material;
+  int control;
+  char student_name[SIZE];
+  char student_number[SIZE];
+  char colloge_name[SIZE];
+  char email_adders[SIZE];
+} student_t;
 
 // 共同科目
 class Common {
