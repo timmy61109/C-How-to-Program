@@ -20,12 +20,12 @@ typedef struct {
 // 共同科目
 class Common {
   protected:
-	int Chinese;
-	int English;
-	int Math;
+  	int chinese;
+  	int english;
+  	int math;
   public:
     // Constructor
-    Common(int chi, int eng, int ma);
+    Common(student_t student);
     void  showdata();
 };
 
@@ -33,11 +33,11 @@ class Common {
 // 電子科目
 class Electronics {
   protected:
-    int Computer;
-    int Circuit;
+    int computer;
+    int circuit;
   public:
     // Constructor
-    Electronics(int com, int cir);
+    Electronics(student_t student);
     void showdata();
 };
 
@@ -45,11 +45,11 @@ class Electronics {
 // 會計科目
 class Account {
   protected:
-	  int Economics;
-    int Accounting;
+	  int economics;
+    int accounting;
   public:
     // Constructor
-    Account(int eco,int acc);
+    Account(student_t student);
     void showdata();
 };
 
@@ -57,11 +57,11 @@ class Account {
 // 機械科目
 class Mechanics {
   protected:
-	  int Material;
-    int Control;
+	  int material;
+    int control;
   public:
     // Constructor
-    Mechanics(int mat, int con);
+    Mechanics(student_t student);
     void showdata();
 };
 
@@ -69,10 +69,10 @@ class Mechanics {
 // 電子科學生
 class Student_EE:public Common, public Electronics {
   private:
-    char name[LEN];
-    char stu_num[LEN1];
+    char student_name[SIZE];
+    char student_number[SIZE];
   public:                                        // Constructor
-    Student_EE(char *n,char *s, int chi,int eng,int math,int com, int cir);
+    Student_EE(student_t student);
     void showdata();
 };
 
@@ -80,10 +80,10 @@ class Student_EE:public Common, public Electronics {
 // 會計科學生
 class Student_AC:public Common, public Account {
 private:
-     char name[LEN];
-     char stu_num[LEN1];
+     char student_name[SIZE];
+     char student_number[SIZE];
 public:                                        // Constructor
-   Student_AC(char *n,char *s, int chi,int eng,int math, int eco, int acc);
+   Student_AC(student_t student);
    void showdata();
 };
 
@@ -91,21 +91,21 @@ public:                                        // Constructor
 //  機械科學生類別
 class Student_ME:public Common, public Mechanics {
   private:
-    char name[LEN];
-    char stu_num[LEN1];
+    char student_name[SIZE];
+    char student_number[SIZE];
   public:
     // Constructor
-    Student_ME(char *n, char *s, int chi, int eng, int math, int mat, int con);
+    Student_ME(student_t student);
     void showdata();
 };
 
 
-class Colloge::public Student_ME, public Student_EE, public Student_AC {
+class Colloge:public Student_EE, public Student_AC, public Student_ME {
   private:
-    char colloge_name[LEN];
-    char e_mail_add[LEN];
-
+    char colloge_name[SIZE];
+    char email_adders[SIZE];
 
   public:
+    Colloge(student_t student);
     void showdata();
-}
+};
