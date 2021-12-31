@@ -1,6 +1,5 @@
 #include <iostream>
-const int LEN  = 10;
-const int LEN1 = 7;
+const int SIZE = 50;
 
 typedef struct {
   int chinese;
