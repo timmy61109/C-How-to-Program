@@ -93,7 +93,19 @@ int main() {
     std::cout << "\n";
   }
 
-  Student::selection_sort(student);
+  Student student_temp;
+
+  for (size_t i = 0; i < (size_t) Student::get_num(); i++) {
+    for (size_t j = i + 1; j < (size_t) Student::get_num(); j++) {
+      if (student[i].get_school_number() > student[j].get_school_number()) {
+        student_temp = student[i];
+        student[i] = student[j];
+        student[j] = student_temp;
+      }
+    }
+  }
+
+  std::cout << "\n排序過後\n\n";
   for (int i = 0; i< Student::get_num(); i++) {
     student[i].show();
     std::cout << "\n";
