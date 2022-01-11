@@ -1,3 +1,4 @@
+// salary.cpp
 #include <iostream>
 #include <string.h>
 class Salary {
