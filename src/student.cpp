@@ -53,22 +53,7 @@ Student::Student(char name_p[SIZE], int school_number_p, int number_p) {
 
 void Student::show() {
   // 資料顯示
-  std::cout << "\n\n姓名=" << name_n << "\n學號=" << school_number_n << "\n年齡=" << age;
-}
-
-void Student::selection_sort(Student *student_p) {
-  Student student_temp;
-
-  for (size_t i = 0; i < (size_t) Student::get_num(); i++) {
-    for (size_t j = i + 1; j < (size_t) Student::get_num(); j++) {
-      if ((int*) student_p[i].school_number_n > (int*) student_p[j].school_number_n) {
-        student_temp = student_p[i];
-        student_p[i] = student_p[j];
-        student_p[j] = student_temp;
-      }
-    }
-  }
-
+  std::cout << "\n\n姓名=" << name_n << "\n學號=" << *school_number_n << "\n年齡=" << age;
 }
 
 int Student::total_student = 0;
