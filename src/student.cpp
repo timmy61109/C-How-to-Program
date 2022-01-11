@@ -80,15 +80,11 @@ int main() {
   char name_2[50] = "John";
   char name_3[50] = "Jane";
   char name_4[50] = "Mary";
-  char school_num_1[50] = "1234224";
-  char school_num_2[50] = "1234424";
-  char school_num_3[50] = "1216224";
-  char school_num_4[50] = "3224224";
   Student student[4] = {
-    Student(name_1, school_num_1, 11),
-    Student(name_2, school_num_2, 14),
-    Student(name_3, school_num_3, 13),
-    Student(name_4, school_num_4, 12)
+    Student(name_1, 1234421, 11),
+    Student(name_3, 1234422, 13),
+    Student(name_4, 1234424, 12),
+    Student(name_2, 1234423, 14),
   };
 
   // 顯示
