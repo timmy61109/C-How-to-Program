@@ -2,6 +2,10 @@
 const int SIZE = 50;
 
 typedef struct {
+  char student_name[SIZE];
+  char student_number[SIZE];
+  char colloge_name[SIZE];
+  char email_adders[SIZE];
   int chinese;
   int english;
   int math;
@@ -11,10 +15,6 @@ typedef struct {
   int accounting;
   int material;
   int control;
-  char student_name[SIZE];
-  char student_number[SIZE];
-  char colloge_name[SIZE];
-  char email_adders[SIZE];
 } student_t;
 
 // 共同科目
