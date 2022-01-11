@@ -14,9 +14,10 @@ typedef struct {
 class Student {
   private:
     char *name_n;
-    char *school_number_n;
+    int *school_number_n;
     int age;
     static int total_student;  // 記錄學生總數
+    int school_number;
   public:
     Student(char *name_p, char *school_num_p, int number_p);  // Constructor
     Student() {}  // default constructor
