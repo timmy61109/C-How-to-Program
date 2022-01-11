@@ -19,7 +19,7 @@ class Student {
     static int total_student;  // 記錄學生總數
     int school_number;
   public:
-    Student(char *name_p, char *school_num_p, int number_p);  // Constructor
+    Student(char *name_p, int school_number_p, int number_p);  // Constructor
     Student() {}  // default constructor
     ~Student() {
       // Destructor
