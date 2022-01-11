@@ -30,8 +30,11 @@ class Student {
     static int get_num() {
       return total_student;
     }
-    void selection_sort(Student *student_p);
+    int get_school_number() {
+      return school_number;
+    }
     void show();
+    void selection_sort(Student *student);
 };
 
 
