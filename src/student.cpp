@@ -4,6 +4,12 @@
 #include <stdio.h>
 #define SIZE 50
 
+typedef struct {
+  char *name_n;
+  int *school_number_n;
+  int age;
+} student_t;
+
 // 類別宣告
 class Student {
   private:
