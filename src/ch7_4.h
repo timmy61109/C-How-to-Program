@@ -1,3 +1,4 @@
+// ch7_4.h
 #include <iostream>
 const int SIZE = 50;
 
