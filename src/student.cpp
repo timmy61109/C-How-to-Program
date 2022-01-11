@@ -36,7 +36,7 @@ class Student {
 
 
 // Constructor
-Student::Student(char name_p[50], char school_num_p[50], int number_p) {
+Student::Student(char name_p[SIZE], int school_number_p, int number_p) {
   name_n = new char[SIZE];
   school_number_n = new char[SIZE];
   for (size_t i = 0; i < SIZE; i++) {
